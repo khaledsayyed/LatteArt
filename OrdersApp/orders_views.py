@@ -26,6 +26,7 @@ def create(request):
             #order_inst.Customer = form.cleaned_data['renewal_date']
 			order_inst.Product = form.cleaned_data['product']
 			order_inst.Customer = form.cleaned_data['user']
+			order_inst.PaymentMethod = form.cleaned_data['payment_method']
 			#order_inst.PickupTime = datetime.now()
 			order_inst.save()
 
