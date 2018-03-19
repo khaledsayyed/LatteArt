@@ -6,7 +6,7 @@ to install django-datatable use the command:
 
 to install django-datetimepicker use:
 
-## $ pip3 django-bootstrap3-datetimepicker-2
+## $ pip3 install django-bootstrap3-datetimepicker-2
 
 
 localhost:8000/OrdersApp/orders  --> list of orders(datatable)
