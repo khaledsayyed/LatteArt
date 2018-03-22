@@ -1,8 +1,8 @@
 from django.db import models
 PAYMENTMETHODS = (
-    (0, 'Credit Card'),
-    (1, 'From Wallet'),
-    (2, 'On Pickup'),
+    ('Credit Card', 'Credit Card'),
+    ('From Wallet', 'From Wallet'),
+    ('On Pickup', 'On Pickup'),
 )
 class UserProfile(models.Model):
 	Name = models.CharField(max_length=100)
@@ -18,5 +18,5 @@ class Order(models.Model):
 	Customer = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
 	Product = models.ForeignKey(Product,on_delete=models.CASCADE)
 	PickupTime = models.DateTimeField(auto_now=True)
-	PaymentMethod = models.CharField(default=2, max_length=1, choices=PAYMENTMETHODS)
+	PaymentMethod = models.CharField(max_length=50, choices=PAYMENTMETHODS)
 	

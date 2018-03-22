@@ -7,6 +7,9 @@ import datetime
 from .models import Order
 from .forms import NewOrderForm
 
+def products(request):
+	return render(request,"index.html")
+	
 def orders(request):
 	orders = OrderTable()
 	return render(request, "orders/index.html",{'orders':orders})

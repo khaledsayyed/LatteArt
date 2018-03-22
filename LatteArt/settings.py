@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 	'OrdersApp.apps.OrdersappConfig',
 	'table',
-	'bootstrap3_datetime'
+	'datetimepicker'
 ]
 
 MIDDLEWARE = [
