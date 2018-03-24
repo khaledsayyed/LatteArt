@@ -1,7 +1,10 @@
 from django import forms
-from .models import Product  
-from .models import UserProfile  
-from .models import Order  
+from .models import CustomerProfile
+from .models import Product
+from .models import Order
+from .models import Branch
+from .models import Employee 
+
 from .models import PAYMENTMETHODS
 from datetimepicker.helpers import js_loader_url
 from datetimepicker.widgets import DateTimePicker
