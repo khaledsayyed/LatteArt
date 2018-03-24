@@ -1,22 +1,73 @@
 from django.db import models
+from django.core.validators import RegexValidator
+#from django_mysql.models import ListTextField
 PAYMENTMETHODS = (
     ('Credit Card', 'Credit Card'),
     ('From Wallet', 'From Wallet'),
     ('On Pickup', 'On Pickup'),
 )
-class UserProfile(models.Model):
+
+CATEGORY=(
+	(0,'Coffee product'),
+	(1, 'Coffee Beans'),
+	(2,'Food product'),
+)
+
+ORDERSTATUS=(
+	(0, 'Received'),
+	(1, 'Cooking'),
+	(2, 'Ready'),
+)
+
+ADMINRIGHTS=(
+	(0,'Manager'),
+	(1,'Employee'),
+)
+phone_regex = RegexValidator(regex=r'^\d{9,8}$', message="Phone number must be entered in the format: '--------'. Up to 8 digits allowed.")
+
+class CustomerProfile(models.Model):
 	Name = models.CharField(max_length=100)
 	UserName = models.CharField(max_length=100)
 	Password = models.CharField(max_length=100)
-
+	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
+	PhoneNumber=models.CharField(max_length=8, validators=[phone_regex],blank=False)
+	#add credit card information 
+	
 class Product(models.Model):
+	Category=models.CharField(default=0, max_length=1, choices=CATEGORY)
 	Name = models.CharField(max_length=100)
 	Price = models.IntegerField()
 	Description = models.CharField(max_length=300)
+	ProductID=models.IntegerField()
+	Image=models.ImageField (upload_to = 'products_images')
+	
+	
+class Branch(models.Model):
+	Name=models.CharField(max_length=100)
+	#Location=LocationField(based_fields=['Name'],zoom=7, default=Point(1.0,1.0))
+	Description=models.CharField(max_length=300)
+	#ListOfEmployees=models.ListTextField(base_field=models.Employee())
+	ImageID=models.ImageField(upload_to= 'Branch_images')
 	
 class Order(models.Model):
-	Customer = models.ForeignKey(UserProfile,on_delete=models.CASCADE)
-	Product = models.ForeignKey(Product,on_delete=models.CASCADE)
+	Customer = models.ForeignKey(CustomerProfile,on_delete=models.CASCADE)
+	Products = models.ManyToManyField(Product)
 	PickupTime = models.DateTimeField(auto_now=True)
-	PaymentMethod = models.CharField(max_length=50, choices=PAYMENTMETHODS)
+	PaymentMethod = models.CharField(default=2, max_length=1, choices=PAYMENTMETHODS)
+	#order ID will be automatically generated
+	Branch=models.ForeignKey(Branch, on_delete=models.CASCADE)
+	TotalPrice=models.IntegerField()
+	Description = models.CharField(max_length=300)
+	OrderStatus=models.CharField(default=0, max_length=1, choices=ORDERSTATUS)
 	
+	
+	
+	
+class Employee(models.Model):
+	Name=models.CharField(max_length=100)
+	UserName = models.CharField(max_length=100)
+	Password = models.CharField(max_length=100)
+	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
+	AdminRights=models.CharField(default=1, max_length=1, choices=ADMINRIGHTS)
+	Branch=models.ForeignKey(Branch, on_delete=models.CASCADE)	
+
