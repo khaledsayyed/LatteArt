@@ -30,3 +30,10 @@ class EmployeeTable(Table):
 	Email = Column(field='Email', header=u'Email')
 	class Meta:
 		model = Employee
+		
+class ProductTable(Table):
+	id = Column(field='id', header=u'Id')
+	ProductName = Column(field='Product.Name', header=u'Product')
+	ProductPrice = Column(field = 'Product.Price', header=u'Price')
+	class Meta:
+		model = Product
