@@ -1,6 +1,7 @@
 from .models import Order
 from .models import CustomerProfile
 from .models import Product
+from .models import Employee
 from table import Table
 from table.columns import Column
 
@@ -20,3 +21,12 @@ class OrderTable(Table):
 	PaymentMethod = Column(field = 'PaymentMethod',header=u'PaymentMethod')
 	class Meta:
 		model = Order
+		
+class EmployeeTable(Table):
+	id = Column(field='id', header=u'Id')
+	Name = Column(field='Name', header=u'Name')
+	UserName = Column(field='UserName', header=u'UserName')
+	Password = Column(field='Password', header=u'Password')
+	Email = Column(field='Email', header=u'Email')
+	class Meta:
+		model = Employee

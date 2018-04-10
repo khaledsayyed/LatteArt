@@ -8,9 +8,9 @@ PAYMENTMETHODS = (
 )
 
 CATEGORY=(
-	(0,'Coffee product'),
-	(1, 'Coffee Beans'),
-	(2,'Food product'),
+	('coffee','Coffee product'),
+	('beans', 'Coffee Beans'),
+	('food','Food product'),
 )
 
 ORDERSTATUS=(
@@ -31,24 +31,23 @@ class CustomerProfile(models.Model):
 	Password = models.CharField(max_length=100)
 	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
 	PhoneNumber=models.CharField(max_length=8, validators=[phone_regex],blank=False)
-	#add credit card information 
-	
+	#add credit card information
+
 class Product(models.Model):
-	Category=models.CharField(default=0, max_length=1, choices=CATEGORY)
+	Category=models.CharField(max_length=10,choices=CATEGORY)
 	Name = models.CharField(max_length=100)
 	Price = models.IntegerField()
 	Description = models.CharField(max_length=300)
-	ProductID=models.IntegerField()
-	Image=models.ImageField (upload_to = 'products_images')
-	
-	
+#	Image=models.ImageField (upload_to = 'products_images')
+
+
 class Branch(models.Model):
 	Name=models.CharField(max_length=100)
 	#Location=LocationField(based_fields=['Name'],zoom=7, default=Point(1.0,1.0))
 	Description=models.CharField(max_length=300)
 	#ListOfEmployees=models.ListTextField(base_field=models.Employee())
 	ImageID=models.ImageField(upload_to= 'Branch_images')
-	
+
 class Order(models.Model):
 	Customer = models.ForeignKey(CustomerProfile,on_delete=models.CASCADE)
 	Products = models.ManyToManyField(Product)
@@ -58,16 +57,15 @@ class Order(models.Model):
 	Branch=models.ForeignKey(Branch, on_delete=models.CASCADE)
 	TotalPrice=models.IntegerField()
 	Description = models.CharField(max_length=300)
-	OrderStatus=models.CharField(default=0, max_length=1, choices=ORDERSTATUS)
-	
-	
-	
-	
+	OrderStatus=models.IntegerField(default=0, choices=ORDERSTATUS)
+
+
+
+
 class Employee(models.Model):
 	Name=models.CharField(max_length=100)
 	UserName = models.CharField(max_length=100)
 	Password = models.CharField(max_length=100)
 	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
-	AdminRights=models.CharField(default=1, max_length=1, choices=ADMINRIGHTS)
-	Branch=models.ForeignKey(Branch, on_delete=models.CASCADE)	
-
+#	AdminRights=models.CharField(default=1, max_length=1, choices=ADMINRIGHTS)
+#	Branch=models.ForeignKey(Branch, on_delete=models.CASCADE)

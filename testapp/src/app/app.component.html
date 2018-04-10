@@ -1,20 +1,50 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Hey you!!!!! Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="row">
+    <div class="col-lg-9">
+           <div class="card card-outline mb-3">
 
+                    <div class="card-header card-primary" style="font-size:15px;font-weight:bolder">Available Products</div>
+
+                    <!--div class="input-group input-group-lg inner-addon left-addon" style="width:100%"><input type="search" class="form-control input-lg" (keyup)="filter()" style="border-radius:0px" name="" placeholder="search" [(ngModel)]="SearchTerm" /><i style="z-index:55;" class="fa fa-search searchIcon fa-lg"></i><span *ngIf="SearchTerm.length>0" (click)="clearSearch();" class="fa fa-window-close fa-2x searchClear"> </span></div-->
+                      <div *ngFor="let product of Products; let i = index">
+                          <div class="card-block card-secondary" style="padding:0;padding-left:10px;font-weight:strong;font-size:larger;">{{product.Category}}</div>
+                    <div class="card-block" style="padding:0">
+                        <ul  [dragula]='"fourth-bag"' class="list-group list-group-flush" [dragulaModel]='product.Items'>
+                            <li *ngFor="let item of product.Items; let j = index" style="margin:5px;padding:14px;" class="list-group-item item">
+<button class="btn pull-right" style="background-color:#1ab394;color:white;" (click)="add(item,i,j)">ADD</button>
+                               <strong style="font-size:larger">{{item.Name}} _ {{item.Price}}$</strong>
+                            </li>
+                            </ul>
+                    </div>
+                </div>
+              </div>
+
+    </div>
+    <div class="col-lg-3">
+       <div class="affix">
+          <div class="card card-outline mb-4">
+                    <div class="card-header card-primary" style="font-size:15px;font-weight:larger">Your Order</div>
+<input type="text" class="form-control input-lg" placeholder="Pickup Time"/>
+                     <div class="card-block" style="padding:0">
+                        <ul [dragula]='"fourth-bag"' class="list-group list-group-flush" [dragulaModel]='OrderItems' style="height:400px;overflow-y:auto;">
+                            <li  style="margin:5px;" *ngFor="let item of OrderItems" class="list-group-item item">
+<div class="row">
+                              <div class="input-group col col-4">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-secondary" type="button" (click)="item.Count=+item.Count-1;updatePrice();"><i class="fa fa-minus"></i></button>
+                                </span>
+                                <input type="text" class="form-control" style="padding:3px 4px" (change)="updatePrice();" [(ngModel)]="item.Count">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-secondary" type="button" (click)="item.Count=+item.Count+1;updatePrice();"><i class=" fa fa-plus"></i></button>
+                                </span>
+                              </div>
+       <strong>{{item.Name}}</strong><strong class="pull-right">{{item.Price}}$</strong>
+     </div>
+                            </li>
+                              </ul>
+                              <strong style="font-size:larger">Total Price:{{TotalPrice}}</strong>
+                    </div>
+                    <button class="btn btn-primary">Confirm Order</button>
+                </div>
+        </div>
+    </div>
+</div>

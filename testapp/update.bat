@@ -1,1 +1,1 @@
-ng build --watch true --output-path "../OrdersApp/static"
+ng build --watch true --output-path "../OrdersApp/static/NewOrderAngular"

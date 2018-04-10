@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html><header>
+
+{% load static %}
+{% load table_tags %}
+
+
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+
+</header><body>
+    <h1>New employee</h1>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <table>
+        {{ form }}
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+
+</body>
+</html>

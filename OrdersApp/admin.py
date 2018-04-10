@@ -8,3 +8,4 @@ from .models import Employee
 admin.site.register(CustomerProfile)
 admin.site.register(Product)
 admin.site.register(Order)
+admin.site.register(Employee)
