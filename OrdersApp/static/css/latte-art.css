@@ -1,0 +1,74 @@
+body,html .main {
+    font-size: 28px;
+	height: 100%;
+	font-family: "Inconsolata", sans-serif;
+}
+
+ul.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+}
+
+
+ul.navbar li {
+    float: left;
+}
+
+ul.navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px 16px;
+    text-decoration: none;
+}
+
+ul.navbar li a:hover {
+    background-color: #111;
+}
+
+ul.navbar .active {
+    background-color: #696969;
+  
+}
+#map {
+		margin: 25px;
+        height: 400px;
+        width: 80%;
+       }
+.main p { 
+	
+	background-color : lightgrey;
+	width: 100%;
+	border: 25px black;
+    padding: 25px;
+    margin: 25px;
+}
+
+.main .fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+.main .fa:hover {
+    opacity: 0.7;
+}
+.main .button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
