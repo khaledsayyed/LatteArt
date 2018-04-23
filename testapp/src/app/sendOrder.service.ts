@@ -10,7 +10,7 @@ export class HttpService {
 
     constructor(private _http: Http) { } // Injecting the Http Service
 
-    sendData(isCreate,data): Observable<Object> {
+    sendData(data): Observable<Object> {
         let encoded_data = JSON.stringify({ data });
 
 

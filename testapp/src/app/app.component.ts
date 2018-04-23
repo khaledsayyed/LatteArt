@@ -19,7 +19,7 @@ public getProducts(): Observable<any> {
         .catch((err: Response, caught: Observable<any>) => { return Observable.throw(caught); });
 }
 
-constructor(private dragulaService: DragulaService, private http: Http) {
+constructor(private dragulaService: DragulaService, private http: Http){//}, private _httpservice: HttpService,) {
       this.getProducts().subscribe((data) => {
            this.Categories=[...new Set(data.map(item => item.fields.Category))];
         this.Categories.forEach((cat)=>{
@@ -45,6 +45,30 @@ add(item: Product,CategoryIndex: number,ItemIndex:number): void {
 }
 updatePrice():void{
   			 this.TotalPrice=this.OrderItems.reduce((a,b)=>(a+(b.Count*b.Price)),0);
+}
+sendOrder():void{
+  this.sendOrderMethod().subscribe((data)=>console.log(data));
+}
+sendOrderMethod(): Observable<any>{
+  let headers = new Headers({ 'Content-Type': 'application/json' });
+     let options = new RequestOptions({ headers: headers });
+     let body = JSON.stringify(this.OrderItems);
+     return this.http.post('./sendOrder', body, options ).map((res: Response) => res.json());
+  /*
+  this._httpservice.sendData(
+           {
+               "OrderItems": this.OrderItems
+
+           }
+
+       ).subscribe(
+
+           response => {console.log(response)
+              // if (response == "Success") { window.location.replace("../index") }
+           }, // success
+           error => console.log(error),       // error
+           () => console.log('completed')     // complete
+         );*/
 }
 }
 export class Product {

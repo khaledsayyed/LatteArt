@@ -4,6 +4,7 @@ import { HttpModule,JsonpModule } from '@angular/http';
 import { FormsModule} from '@angular/forms';
 import { DragulaModule, DragulaService } from 'ng2-dragula/ng2-dragula'
 import { AppComponent } from './app.component';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -14,10 +15,11 @@ import { AppComponent } from './app.component';
     BrowserModule,
     HttpModule,
     JsonpModule,
-	DragulaModule,
-   FormsModule
+	 DragulaModule,
+   FormsModule,
+   HttpClientModule
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

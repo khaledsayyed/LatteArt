@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col-lg-9\">\r\n           <div class=\"card card-outline mb-3\">\r\n\r\n                    <div class=\"card-header card-primary\" style=\"font-size:15px;font-weight:bolder\">Available Products</div>\r\n\r\n                    <!--div class=\"input-group input-group-lg inner-addon left-addon\" style=\"width:100%\"><input type=\"search\" class=\"form-control input-lg\" (keyup)=\"filter()\" style=\"border-radius:0px\" name=\"\" placeholder=\"search\" [(ngModel)]=\"SearchTerm\" /><i style=\"z-index:55;\" class=\"fa fa-search searchIcon fa-lg\"></i><span *ngIf=\"SearchTerm.length>0\" (click)=\"clearSearch();\" class=\"fa fa-window-close fa-2x searchClear\"> </span></div-->\r\n                      <div *ngFor=\"let product of Products; let i = index\">\r\n                          <div class=\"card-block card-secondary\" style=\"padding:0;padding-left:10px;font-weight:strong;font-size:larger;\">{{product.Category}}</div>\r\n                    <div class=\"card-block\" style=\"padding:0\">\r\n                        <ul  [dragula]='\"fourth-bag\"' class=\"list-group list-group-flush\" [dragulaModel]='product.Items'>\r\n                            <li *ngFor=\"let item of product.Items; let j = index\" style=\"margin:5px;padding:14px;\" class=\"list-group-item item\">\r\n<button class=\"btn pull-right\" style=\"background-color:#1ab394;color:white;\" (click)=\"add(item,i,j)\">ADD</button>\r\n                               <strong style=\"font-size:larger\">{{item.Name}} _ {{item.Price}}$</strong>\r\n                            </li>\r\n                            </ul>\r\n                    </div>\r\n                </div>\r\n              </div>\r\n\r\n    </div>\r\n    <div class=\"col-lg-3\">\r\n       <div class=\"affix\">\r\n          <div class=\"card card-outline mb-4\">\r\n                    <div class=\"card-header card-primary\" style=\"font-size:15px;font-weight:larger\">Your Order</div>\r\n<input type=\"text\" class=\"form-control input-lg\" placeholder=\"Pickup Time\"/>\r\n                     <div class=\"card-block\" style=\"padding:0\">\r\n                        <ul [dragula]='\"fourth-bag\"' class=\"list-group list-group-flush\" [dragulaModel]='OrderItems' style=\"height:400px;overflow-y:auto;\">\r\n                            <li  style=\"margin:5px;\" *ngFor=\"let item of OrderItems\" class=\"list-group-item item\">\r\n<div class=\"row\">\r\n                              <div class=\"input-group col col-4\">\r\n                                <span class=\"input-group-btn\">\r\n                                  <button class=\"btn btn-secondary\" type=\"button\" (click)=\"item.Count=+item.Count-1;updatePrice();\"><i class=\"fa fa-minus\"></i></button>\r\n                                </span>\r\n                                <input type=\"text\" class=\"form-control\" style=\"padding:3px 4px\" (change)=\"updatePrice();\" [(ngModel)]=\"item.Count\">\r\n                                <span class=\"input-group-btn\">\r\n                                  <button class=\"btn btn-secondary\" type=\"button\" (click)=\"item.Count=+item.Count+1;updatePrice();\"><i class=\" fa fa-plus\"></i></button>\r\n                                </span>\r\n                              </div>\r\n       <strong>{{item.Name}}</strong><strong class=\"pull-right\">{{item.Price}}$</strong>\r\n     </div>\r\n                            </li>\r\n                              </ul>\r\n                              <strong style=\"font-size:larger\">Total Price:{{TotalPrice}}</strong>\r\n                    </div>\r\n                    <button class=\"btn btn-primary\">Confirm Order</button>\r\n                </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-lg-9\">\r\n           <div class=\"card card-outline mb-3\">\r\n\r\n                    <div class=\"card-header card-primary\" style=\"font-size:15px;font-weight:bolder\">Available Products</div>\r\n\r\n                    <!--div class=\"input-group input-group-lg inner-addon left-addon\" style=\"width:100%\"><input type=\"search\" class=\"form-control input-lg\" (keyup)=\"filter()\" style=\"border-radius:0px\" name=\"\" placeholder=\"search\" [(ngModel)]=\"SearchTerm\" /><i style=\"z-index:55;\" class=\"fa fa-search searchIcon fa-lg\"></i><span *ngIf=\"SearchTerm.length>0\" (click)=\"clearSearch();\" class=\"fa fa-window-close fa-2x searchClear\"> </span></div-->\r\n                      <div *ngFor=\"let product of Products; let i = index\">\r\n                          <div class=\"card-block card-secondary\" style=\"padding:0;padding-left:10px;font-weight:strong;font-size:larger;\">{{product.Category}}</div>\r\n                    <div class=\"card-block\" style=\"padding:0\">\r\n                        <ul  [dragula]='\"fourth-bag\"' class=\"list-group list-group-flush\" [dragulaModel]='product.Items'>\r\n                            <li *ngFor=\"let item of product.Items; let j = index\" style=\"margin:5px;padding:14px;\" class=\"list-group-item item\">\r\n<button class=\"btn pull-right\" style=\"background-color:#1ab394;color:white;\" (click)=\"add(item,i,j)\">ADD</button>\r\n                               <strong style=\"font-size:larger\">{{item.Name}} _ {{item.Price}}$</strong>\r\n                            </li>\r\n                            </ul>\r\n                    </div>\r\n                </div>\r\n              </div>\r\n\r\n    </div>\r\n    <div class=\"col-lg-3\">\r\n       <div class=\"affix\">\r\n          <div class=\"card card-outline mb-4\">\r\n                    <div class=\"card-header card-primary\" style=\"font-size:15px;font-weight:larger\">Your Order</div>\r\n<input type=\"text\" class=\"form-control input-lg\" placeholder=\"Pickup Time\"/>\r\n                     <div class=\"card-block\" style=\"padding:0\">\r\n                        <ul [dragula]='\"fourth-bag\"' class=\"list-group list-group-flush\" [dragulaModel]='OrderItems' style=\"height:400px;overflow-y:auto;\">\r\n                            <li  style=\"margin:5px;\" *ngFor=\"let item of OrderItems\" class=\"list-group-item item\">\r\n<div class=\"row\">\r\n                              <div class=\"input-group col col-4\">\r\n                                <span class=\"input-group-btn\">\r\n                                  <button class=\"btn btn-secondary\" type=\"button\" (click)=\"item.Count=+item.Count-1;updatePrice();\"><i class=\"fa fa-minus\"></i></button>\r\n                                </span>\r\n                                <input type=\"text\" class=\"form-control\" style=\"padding:3px 4px\" (change)=\"updatePrice();\" [(ngModel)]=\"item.Count\">\r\n                                <span class=\"input-group-btn\">\r\n                                  <button class=\"btn btn-secondary\" type=\"button\" (click)=\"item.Count=+item.Count+1;updatePrice();\"><i class=\" fa fa-plus\"></i></button>\r\n                                </span>\r\n                              </div>\r\n       <strong>{{item.Name}}</strong><strong class=\"pull-right\">{{item.Price}}$</strong>\r\n     </div>\r\n                            </li>\r\n                              </ul>\r\n                              <strong style=\"font-size:larger\">Total Price:{{TotalPrice}}</strong>\r\n                    </div>\r\n                    <button (click)=\"sendOrder()\" class=\"btn btn-primary\">Confirm Order</button>\r\n                </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -90,6 +90,30 @@ let AppComponent = class AppComponent {
     updatePrice() {
         this.TotalPrice = this.OrderItems.reduce((a, b) => (a + (b.Count * b.Price)), 0);
     }
+    sendOrder() {
+        this.sendOrderMethod().subscribe((data) => console.log(data));
+    }
+    sendOrderMethod() {
+        let headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
+        let options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestOptions */]({ headers: headers });
+        let body = JSON.stringify(this.OrderItems);
+        return this.http.post('./sendOrder', body, options).map((res) => res.json());
+        /*
+        this._httpservice.sendData(
+                 {
+                     "OrderItems": this.OrderItems
+      
+                 }
+      
+             ).subscribe(
+      
+                 response => {console.log(response)
+                    // if (response == "Success") { window.location.replace("../index") }
+                 }, // success
+                 error => console.log(error),       // error
+                 () => console.log('completed')     // complete
+               );*/
+    }
 };
 AppComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
@@ -97,7 +121,7 @@ AppComponent = __decorate([
         template: __webpack_require__("./src/app/app.component.html"),
         styles: [__webpack_require__("./src/app/app.component.css")]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ng2_dragula_ng2_dragula__["DragulaService"], __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ng2_dragula_ng2_dragula__["DragulaService"], __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
 ], AppComponent);
 
 class Product {
@@ -127,12 +151,14 @@ class Product {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__ = __webpack_require__("./node_modules/ng2-dragula/ng2-dragula.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("./src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm2015/http.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -148,12 +174,13 @@ AppModule = __decorate([
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* HttpModule */],
-            __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* JsonpModule */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* HttpModule */],
+            __WEBPACK_IMPORTED_MODULE_2__angular_http__["d" /* JsonpModule */],
             __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__["DragulaModule"],
-            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */]
+            __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_6__angular_common_http__["a" /* HttpClientModule */]
         ],
-        providers: [],
+        providers: [__WEBPACK_IMPORTED_MODULE_6__angular_common_http__["a" /* HttpClientModule */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);

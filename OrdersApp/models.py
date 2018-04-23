@@ -48,9 +48,13 @@ class Branch(models.Model):
 	#ListOfEmployees=models.ListTextField(base_field=models.Employee())
 	ImageID=models.ImageField(upload_to= 'Branch_images')
 
+class OrderItem(models.Model):
+    Product = models.ForeignKey(Product,on_delete=models.CASCADE)
+    Quantity = models.IntegerField()
+
 class Order(models.Model):
 	Customer = models.ForeignKey(CustomerProfile,on_delete=models.CASCADE)
-	Products = models.ManyToManyField(Product)
+	Products = models.ManyToManyField(OrderItem)
 	PickupTime = models.DateTimeField(auto_now=True)
 	PaymentMethod = models.CharField(default=2, max_length=1, choices=PAYMENTMETHODS)
 	#order ID will be automatically generated
@@ -58,9 +62,6 @@ class Order(models.Model):
 	TotalPrice=models.IntegerField()
 	Description = models.CharField(max_length=300)
 	OrderStatus=models.IntegerField(default=0, choices=ORDERSTATUS)
-
-
-
 
 class Employee(models.Model):
 	Name=models.CharField(max_length=100)

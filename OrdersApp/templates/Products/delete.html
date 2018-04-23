@@ -1,0 +1,15 @@
+
+
+	
+	{% extends 'layout.html' %} 
+{% block 'body' %}
+    <h1>Choose Product</h1>
+    
+    <form action="" method="Post">
+        {% csrf_token %}
+		<table>
+        {{ form2 }}
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

@@ -33,7 +33,9 @@ class EmployeeTable(Table):
 		
 class ProductTable(Table):
 	id = Column(field='id', header=u'Id')
-	ProductName = Column(field='Product.Name', header=u'Product')
-	ProductPrice = Column(field = 'Product.Price', header=u'Price')
+	Name = Column(field='Name', header=u'Name')
+	Price = Column(field = 'Price', header=u'Price')
+	Description = Column(field = 'Description', header=u'Description')
+	Category = Column(field = 'Category', header=u'Category')
 	class Meta:
 		model = Product
