@@ -13,4 +13,5 @@ urlpatterns = [
 	path('/employees/new', employees_views.add, name='add_employees'),
 	path('/mainpage', mainpageview.home, name= 'main'),
 	path('/menu', mainpageview.menu, name= 'menu'),
+	path('/login', mainpageview.login, name='login'),
 ]
