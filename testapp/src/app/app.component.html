@@ -11,7 +11,7 @@
                         <ul  [dragula]='"fourth-bag"' class="list-group list-group-flush" [dragulaModel]='product.Items'>
                             <li *ngFor="let item of product.Items; let j = index" style="margin:5px;padding:14px;" class="list-group-item item">
 <button class="btn pull-right" style="background-color:#1ab394;color:white;" (click)="add(item,i,j)">ADD</button>
-                               <strong style="font-size:larger">{{item.Name}} _ {{item.Price}}$</strong>
+                               <strong style="font-size:larger">{{item.Name}} , {{item.Price}}$</strong>
                             </li>
                             </ul>
                     </div>
