@@ -1,3 +1,4 @@
+
 {% load static %}
 <!Doctype html>
 <html>
@@ -72,7 +73,7 @@ span.psw {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 3; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -89,7 +90,7 @@ span.psw {
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
 	overflow: auto; /* Enable scroll if needed */
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 35%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button (x) */
@@ -160,23 +161,31 @@ span.psw {
 		{% endblock %}
 
 <div id="id01" class="modal">
-  <form class="modal-content animate" action="/action_page.php">
+  <form class="modal-content animate" action="{% url 'login' %}">
     <!-- <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="/static/img_avatar2.png" alt="Avatar" class="avatar">
     </div> -->
 
     <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <label for="uname"><b>Username</b></label><br/>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <input type="text" placeholder="Enter Username" name="uname" required style="width:55%"><br/>
+
+      <label for="psw"><b>Password</b></label><br/>
+      <input type="password" placeholder="Enter Password" name="psw" required style="width:55%"><br/>
         
-      <button type="submit">Login</button>
+      <button type="submit" style="width:30%">Login</button>
       <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
+      <input type="checkbox" checked="checked" name="remember"> Remember me 
       </label>
+      <br/>
+      <br/>
+      <br/>
+      <label for="signup"><b>Not A user, Sign Up</b></label>
+      <br/>
+      <button type="text" style="width:30%">SignUp</button>
+
     </div>
 
     <div class="container" style="background-color:#f1f1f1">

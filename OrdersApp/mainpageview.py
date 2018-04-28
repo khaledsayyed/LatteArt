@@ -10,5 +10,5 @@ def home(request):
 		return render(request, "mainpage/main.html")
 		
 def login(request):
-	return render(request, "mainpage/login.html")
+	return render(request, "mainpage/main.html")
 	
