@@ -5,6 +5,7 @@
   },
   "apps": [
     {
+	  "name": "app",
       "root": "src",
       "outDir": "dist",
       "assets": [
@@ -31,7 +32,32 @@
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
-    }
+    },
+	{
+      "name":"app2",
+      "root":"src",
+      "outDir":"dist2",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "main":"main2.ts",
+      "index": "index2.html",
+      "polyfills":"polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app2",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+	  "styles": [],
+      "scripts": [],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+	}
   ],
   "e2e": {
     "protractor": {
