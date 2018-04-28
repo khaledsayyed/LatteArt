@@ -29,8 +29,8 @@ class CustomerProfile(models.Model):
 	Name = models.CharField(max_length=100)
 	UserName = models.CharField(max_length=100)
 	Password = models.CharField(max_length=100)
-	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
-	PhoneNumber=models.CharField(max_length=8, validators=[phone_regex],blank=False)
+	Email=models.EmailField(max_length=100, blank=False, unique=False, null=True)
+	PhoneNumber=models.CharField(max_length=8,blank=False)
 	#add credit card information
 
 class Product(models.Model):
@@ -68,5 +68,5 @@ class Employee(models.Model):
 	UserName = models.CharField(max_length=100)
 	Password = models.CharField(max_length=100)
 	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
-#	AdminRights=models.CharField(default=1, max_length=1, choices=ADMINRIGHTS)
+	#AdminRights=models.CharField(default=1, max_length=1, choices=ADMINRIGHTS)
 #	Branch=models.ForeignKey(Branch, on_delete=models.CASCADE)

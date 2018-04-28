@@ -17,4 +17,8 @@ class NewProductForm (forms.ModelForm):
 class DeleteProductForm (forms.Form):
 	ID = forms.IntegerField()
 	
+# class SignupForm(forms.ModelForm):
+	# class Meta:
+		# model=CustomerProfile
+		# fields={'Name', 'User Name','Password', 'Email', 'Phone Number'}
 	

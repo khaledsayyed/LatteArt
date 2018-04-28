@@ -1,6 +1,40 @@
 
 		{% extends 'layout.html' %} 
 {% block 'body' %}
+<script type="text/javascript">
+        $(document).ready(function() {
+            $(function() {
+                $( "#alertBox" ).dialog({
+                    modal: true,
+                    closeOnEscape: false,
+                    dialogClass: "no-close",
+                    resizable: false,
+                    draggable: false,
+                    width: 600,
+                    buttons: [
+                        {
+                            text: "OK",
+                            click: function() {
+                            $( this ).dialog( "close" );
+                            }
+                        }
+                    ]
+                });
+            });
+        });
+    </script>
+	
+{% if wrongPass or wrongUname %}
+    <div id="alertBox" title="Alert">
+	{% if wrongPass %}
+        <p>Incorrect Passowrd, please try again</p>
+	{% endif%}
+	
+	{% if wrongUname %}
+		<p>This username does not exist, please signt up</p>
+	{% endif %}
+    </div>
+{% endif %}
 <div class="main">
 <!-- <!-- Navigation Bar  -->   
 

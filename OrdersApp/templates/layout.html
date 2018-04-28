@@ -148,15 +148,38 @@ span.psw {
 </head>
 <body>
 		<ul class="navbar">
-            <li><a class="active" href="http://localhost:8000/OrdersApp/mainpage"><i class="fa fa-home"></i></a>
+		<li><a class="active" href="http://localhost:8000/OrdersApp/mainpage"><i class="fa fa-home"></i></a>
+		
+		{% ifequal request.session.role "guest" %}
             <li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
+			<li onclick="document.getElementById('id01').style.display='block'"><a>Login</a></li>
+		{% endifequal %}
+		
+		{% ifequal request.session.role "customer"%}
+			 <li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
             <li><a href="http://localhost:8000/OrdersApp/orders">Myorders</a></li>
+			<!--> log out
+				profile<-->
+	    {% endifequal %}
+		
 	    {% ifequal request.session.role "manager" %}
+			<li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
+			<li><a href="http://localhost:8000/OrdersApp/products">Products</a></li>
             <li><a href="http://localhost:8000/OrdersApp/employees">Employees</a></li>
-	    {% endifqual %}
-	    <li onclick="document.getElementById('id01').style.display='block'"><a>Login</a></li>
-            <li><a  href="http://localhost:8000/OrdersApp/mainpage#aboutus">About us</a></li>
-	    <li><a href="http://localhost:8000/OrdersApp/products">Products</a></li>
+			<!--> log out
+				customers
+				orders<-->
+	    {% endifequal %}
+	    
+		{% ifequal request.session.role "employee" %}
+			<li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
+			<li><a href="http://localhost:8000/OrdersApp/products">Products</a></li>
+			<!--> log out
+				customers
+				orders<-->	    
+		{% endifequal %}
+		
+		<li><a  href="http://localhost:8000/OrdersApp/mainpage#aboutus">About us</a></li>
 
         </ul>
 		{% block 'body' %}
@@ -177,7 +200,7 @@ span.psw {
       <label for="psw"><b>Password</b></label><br/>
       <input type="password" placeholder="Enter Password" name="psw" required style="width:55%"><br/>
         
-      <button type="submit" style="width:30%">Login</button>
+      <button type="submit"  style="width:30%">Login</button>
       <label>
       <input type="checkbox" checked="checked" name="remember"> Remember me 
       </label>
@@ -207,6 +230,7 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
 </script>
 </body>
 
