@@ -157,25 +157,25 @@ span.psw {
 		
 		{% ifequal request.session.role "customer"%}
 			 <li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
-            <li><a href="http://localhost:8000/OrdersApp/orders">Myorders</a></li>
-			<!--> log out
-				profile<-->
+             <li><a href="http://localhost:8000/OrdersApp/orders">Myorders</a></li>
+			 <li><a href="http://localhost:8000/OrdersApp/logout">Logout</a></li>
+			<!-->profile<-->
 	    {% endifequal %}
 		
 	    {% ifequal request.session.role "manager" %}
 			<li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
 			<li><a href="http://localhost:8000/OrdersApp/products">Products</a></li>
             <li><a href="http://localhost:8000/OrdersApp/employees">Employees</a></li>
-			<!--> log out
-				customers
+			<li><a href="http://localhost:8000/OrdersApp/logout">Logout</a></li>
+			<!-->customers
 				orders<-->
 	    {% endifequal %}
 	    
 		{% ifequal request.session.role "employee" %}
 			<li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
 			<li><a href="http://localhost:8000/OrdersApp/products">Products</a></li>
-			<!--> log out
-				customers
+			<li><a href="http://localhost:8000/OrdersApp/logout">Logout</a></li>
+			<!-->customers
 				orders<-->	    
 		{% endifequal %}
 		

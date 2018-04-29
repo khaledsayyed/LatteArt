@@ -20,5 +20,6 @@ urlpatterns = [
 	path('products/delete', product_views.delete_p, name= 'delete products'),
 	path('products/edit', product_views.edit_p, name='edit product'),
 	path('login', mainpageview.login, name='login'),
+	path('logout', mainpageview.logout, name='logout'),
 
 ]
