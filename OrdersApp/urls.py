@@ -5,6 +5,7 @@ from . import orders_views
 from . import employees_views
 from . import mainpageview
 from . import product_views
+from . import signupview
 urlpatterns = [
 	path('users', users_views.users, name='users'),
 	path('orders', orders_views.orders, name='orders'),
@@ -21,5 +22,6 @@ urlpatterns = [
 	path('products/edit', product_views.edit_p, name='edit product'),
 	path('login', mainpageview.login, name='login'),
 	path('logout', mainpageview.logout, name='logout'),
-
+	path('signup',signupview.add, name= 'signup'),
+	path('customer',signupview.customer, name= 'customer'),
 ]

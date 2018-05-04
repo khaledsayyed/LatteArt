@@ -1,6 +1,7 @@
 from django import forms
 from .models import Employee
 from.models import Product
+from .models import CustomerProfile
 class NewEmpForm(forms.ModelForm):
 
     class Meta:
@@ -17,8 +18,8 @@ class NewProductForm (forms.ModelForm):
 class DeleteProductForm (forms.Form):
 	ID = forms.IntegerField()
 	
-# class SignupForm(forms.ModelForm):
-	# class Meta:
-		# model=CustomerProfile
-		# fields={'Name', 'User Name','Password', 'Email', 'Phone Number'}
+class SignupForm(forms.ModelForm):
+	class Meta:
+		model=CustomerProfile
+		fields=('PhoneNumber','Name','Password','Email', 'UserName')
 	
