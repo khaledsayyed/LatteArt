@@ -36,6 +36,16 @@ class EmployeeTable(Table):
 	class Meta:
 		model = Employee
 
+
+class CustomerTable(Table):
+	Name = Column(field='Name', header=u'Name')
+	UserName = Column(field='UserName', header=u'UserName')
+	Password = Column(field='Password', header=u'Password')
+	Email = Column(field='Email', header=u'Email')
+	PhoneNumber = Column(field='PhoneNumber',header=u'PhoneNumber')
+	class Meta:
+		model =CustomerProfile
+
 class ProductTable(Table):
 	id = Column(field='id', header=u'ID')
 	Name = Column(field='Name', header=u'Name')

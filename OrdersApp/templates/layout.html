@@ -1,18 +1,13 @@
+
 {% load static %}
 <!Doctype html>
 <html>
 <head>
 
 <meta charset="utf-8">
-<title>Order</title>
+<title>LatteArt</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %">
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-  <meta charset="utf-8">
-
-  <title>Order</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-   <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %">
 <link href="{% static 'css/cards.css' %}" rel="stylesheet">
 <link href="{% static 'css/bootstrap-grid.min.css' %}" rel="stylesheet">
 <link href="{% static 'css/latte-art.css' %}" rel="stylesheet">
@@ -23,38 +18,72 @@
 </head>
 <body>
 		<ul class="navbar">
-            <li><a class="active" href="http://localhost:8000/OrdersApp/mainpage"><i class="fa fa-home"></i></a>
+		<li><a class="active" href="http://localhost:8000/OrdersApp/mainpage"><i class="fa fa-home"></i></a>
+		
+		{% ifequal request.session.role "guest" %}
             <li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
-            <li><a href="http://localhost:8000/OrdersApp/orders">Myorders</a></li>
-            <li><a href="http://localhost:8000/OrdersApp/employees">Employees</a></li>
 			<li onclick="document.getElementById('id01').style.display='block'"><a>Login</a></li>
-		    <li><a  href="http://localhost:8000/OrdersApp/mainpage#aboutus">About us</a></li>
+		{% endifequal %}
+		
+		{% ifequal request.session.role "customer"%}
+			 <li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
+             <li><a href="http://localhost:8000/OrdersApp/orders">Myorders</a></li>
+			 <li><a href="http://localhost:8000/OrdersApp/logout">Logout</a></li>
+			<!-->profile<-->
+	    {% endifequal %}
+		
+	    {% ifequal request.session.role "manager" %}
+			<li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
+			<li><a href="http://localhost:8000/OrdersApp/products">Products</a></li>
+            <li><a href="http://localhost:8000/OrdersApp/employees">Employees</a></li>
+			<li><a href="http://localhost:8000/OrdersApp/logout">Logout</a></li>
+			<!-->customers
+				orders<-->
+	    {% endifequal %}
+	    
+		{% ifequal request.session.role "employee" %}
+			<li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
 			<li><a href="http://localhost:8000/OrdersApp/products">Products</a></li>
 			<li><a href="http://localhost:8000/OrdersApp/users">users</a></li>
 
+			<li><a href="http://localhost:8000/OrdersApp/logout">Logout</a></li>
+			<!-->customers
+				orders<-->	    
+		{% endifequal %}
+		
+		<li><a  href="http://localhost:8000/OrdersApp/mainpage#aboutus">About us</a></li>
 
         </ul>
 		{% block 'body' %}
 		{% endblock %}
 
 <div id="id01" class="modal">
-  <form class="modal-content animate" action="/action_page.php">
+  <form class="modal-content animate" action="{% url 'login' %}">
     <!-- <div class="imgcontainer">
       <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
       <img src="/static/img_avatar2.png" alt="Avatar" class="avatar">
     </div> -->
 
     <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
+      <label for="uname"><b>Username</b></label><br/>
 
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
 
-      <button type="submit">Login</button>
+      <input type="text" placeholder="Enter Username" name="uname" required style="width:55%"><br/>
+
+      <label for="psw"><b>Password</b></label><br/>
+      <input type="password" placeholder="Enter Password" name="psw" required style="width:55%"><br/>
+        
+      <button type="submit"  style="width:30%">Login</button>
       <label>
-        <input type="checkbox" checked="checked" name="remember"> Remember me
+      <input type="checkbox" checked="checked" name="remember"> Remember me 
       </label>
+      <br/>
+      <br/>
+      <br/>
+      <label for="signup"><b>Not A user?  Sign Up</b></label>
+      <br/>
+      <button type="text" onClick="location.href='signup'" style="width:30%">SignUp</button>
+
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
@@ -74,6 +103,8 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+
 </script>
 </body>
 

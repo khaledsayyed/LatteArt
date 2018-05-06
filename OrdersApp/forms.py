@@ -11,9 +11,13 @@ class NewProductForm (forms.ModelForm):
     class Meta:
             model = Product
             fields = ('Category','Name', 'Price', 'Description', 'Stock', 'unlimited','Image')
-
-
 class EditWalletForm(forms.ModelForm):
 	class Meta:
 		model = CustomerProfile
 		fields = ('Name','Wallet')									  
+
+class SignupForm(forms.ModelForm):
+	class Meta:
+		model=CustomerProfile
+		fields=('PhoneNumber','Name','Password','Email', 'UserName')
+	

@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 #from django_mysql.models import ListTextField
+
 PAYMENTMETHODS = (
     ('CreditCard', 'Credit Card'),
     ('Wallet', 'From Wallet'),
@@ -20,11 +21,12 @@ ORDERSTATUS=(
 )
 
 ADMINRIGHTS=(
-	(0,'Manager'),
-	(1,'Employee'),
+	('manager','Manager'),
+	('employee', 'Employee'),
+	('customer', 'Customer'),
 )
 phone_regex = RegexValidator(regex=r'^\d{9,8}$', message="Phone number must be entered in the format: '--------'. Up to 8 digits allowed.")
-
+	
 class CustomerProfile(models.Model):
 	Name = models.CharField(max_length=100)
 	UserName = models.CharField(max_length=100)
@@ -32,8 +34,8 @@ class CustomerProfile(models.Model):
 	Email=models.EmailField(max_length=100, blank=False, unique=True)
 	PhoneNumber=models.CharField(max_length=8,blank=False)
 	Wallet = models.IntegerField(default=0)
-	#add credit card information
 
+	#add credit card information
 class Product(models.Model):
 	Category=models.CharField(max_length=10,choices=CATEGORY)
 	Name = models.CharField(max_length=100)
@@ -61,16 +63,25 @@ class Order(models.Model):
 	Description = models.CharField(max_length=300)
 	OrderStatus=models.IntegerField(default=0, choices=ORDERSTATUS)
 
+<<<<<<< HEAD
 class OrderItem(models.Model):
     Order=models.ForeignKey(Order, related_name="items", null=True, blank=True,on_delete=models.CASCADE)
     Product = models.ForeignKey(Product,on_delete=models.CASCADE, related_name='products')
     Quantity = models.IntegerField()
 
 
+=======
+class Manager(models.Model):
+	Name=models.CharField(max_length=100)
+	UserName = models.CharField(max_length=100)
+	Password = models.CharField(max_length=100)
+	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
+	
+>>>>>>> f16a16f747d36564ce9006dc2c61aa2ce6cddfbd
 class Employee(models.Model):
 	Name=models.CharField(max_length=100)
 	UserName = models.CharField(max_length=100)
 	Password = models.CharField(max_length=100)
 	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
-#	AdminRights=models.CharField(default=1, max_length=1, choices=ADMINRIGHTS)
+	#AdminRights=models.CharField(max_length=10, choices=ADMINRIGHTS)
 #	Branch=models.ForeignKey(Branch, on_delete=models.CASCADE)
