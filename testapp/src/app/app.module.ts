@@ -5,7 +5,10 @@ import { FormsModule} from '@angular/forms';
 import { DragulaModule, DragulaService } from 'ng2-dragula/ng2-dragula'
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-
+import * as $ from 'jquery';
+import 'bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js';
+import 'bootstrap-timepicker/js/bootstrap-timepicker.js';
+import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime.js';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,8 @@ import {HttpClientModule} from '@angular/common/http';
     JsonpModule,
 	 DragulaModule,
    FormsModule,
-   HttpClientModule
+   HttpClientModule,
+   NKDatetimeModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

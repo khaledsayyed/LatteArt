@@ -1,1 +1,32 @@
-hello app2 {{name}}
+<div class="container" *ngFor="let product of Products; let i = index">
+  <h1 class="mt-4">{{product.Category}}</h1>
+  <div class="row">
+    <div *ngFor="let item of product.Items; let j = index" class="col-3 pb-4" style="padding:3px;" ><!--style="width: 18rem;"-->
+
+            <div class="card">
+                <img class="card-img-top" [src]="'/OrdersApp/media/'+item.Image">
+                <div class="card-block">
+                    <p class="card-title">
+                        {{ item.Name }} <span class="text-muted">($ {{ item.Price}} )</span>
+                    </p>
+                    <div class="card-text">
+
+                      <div class="checkbox checkbox-lg checkbox-success pull-right">
+                             <input [(ngModel)]="item.Selected" (change)="UpdateProductsList()" [id]="item.ID" type="checkbox">
+          <label [for]="item.ID">
+          </label>
+                           </div>
+            </div>
+                </div>
+            </div>
+
+    </div>
+  </div>
+</div>
+<div id="order_summary" *ngIf="TotalPrice!=0" class="card card-secondary">
+  <p>Total Price: ${{TotalPrice}}</p>
+  <a class="btn btn-primary" [href]="'./orders/new?selected='+ProductsIdQty">
+  Confirm Order
+</a>
+</div>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">

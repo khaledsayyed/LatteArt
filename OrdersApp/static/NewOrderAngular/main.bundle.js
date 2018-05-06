@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"row\">\r\n    <div class=\"col-lg-9\">\r\n           <div class=\"card card-outline mb-3\">\r\n\r\n                    <div class=\"card-header card-primary\" style=\"font-size:15px;font-weight:bolder\">Available Products</div>\r\n\r\n                    <!--div class=\"input-group input-group-lg inner-addon left-addon\" style=\"width:100%\"><input type=\"search\" class=\"form-control input-lg\" (keyup)=\"filter()\" style=\"border-radius:0px\" name=\"\" placeholder=\"search\" [(ngModel)]=\"SearchTerm\" /><i style=\"z-index:55;\" class=\"fa fa-search searchIcon fa-lg\"></i><span *ngIf=\"SearchTerm.length>0\" (click)=\"clearSearch();\" class=\"fa fa-window-close fa-2x searchClear\"> </span></div-->\r\n                      <div *ngFor=\"let product of Products; let i = index\">\r\n                          <div class=\"card-block card-secondary\" style=\"padding:0;padding-left:10px;font-weight:strong;font-size:larger;\">{{product.Category}}</div>\r\n                    <div class=\"card-block\" style=\"padding:0\">\r\n                        <ul  [dragula]='\"fourth-bag\"' class=\"list-group list-group-flush\" [dragulaModel]='product.Items'>\r\n                            <li *ngFor=\"let item of product.Items; let j = index\" style=\"margin:5px;padding:14px;\" class=\"list-group-item item\">\r\n<button class=\"btn pull-right\" style=\"background-color:#1ab394;color:white;\" (click)=\"add(item,i,j)\">ADD</button>\r\n                               <strong style=\"font-size:larger\">{{item.Name}} _ {{item.Price}}$</strong>\r\n                            </li>\r\n                            </ul>\r\n                    </div>\r\n                </div>\r\n              </div>\r\n\r\n    </div>\r\n    <div class=\"col-lg-3\">\r\n       <div class=\"affix\">\r\n          <div class=\"card card-outline mb-4\">\r\n                    <div class=\"card-header card-primary\" style=\"font-size:15px;font-weight:larger\">Your Order</div>\r\n<input type=\"text\" class=\"form-control input-lg\" placeholder=\"Pickup Time\"/>\r\n                     <div class=\"card-block\" style=\"padding:0\">\r\n                        <ul [dragula]='\"fourth-bag\"' class=\"list-group list-group-flush\" [dragulaModel]='OrderItems' style=\"height:400px;overflow-y:auto;\">\r\n                            <li  style=\"margin:5px;\" *ngFor=\"let item of OrderItems\" class=\"list-group-item item\">\r\n<div class=\"row\">\r\n                              <div class=\"input-group col col-4\">\r\n                                <span class=\"input-group-btn\">\r\n                                  <button class=\"btn btn-secondary\" type=\"button\" (click)=\"item.Count=+item.Count-1;updatePrice();\"><i class=\"fa fa-minus\"></i></button>\r\n                                </span>\r\n                                <input type=\"text\" class=\"form-control\" style=\"padding:3px 4px\" (change)=\"updatePrice();\" [(ngModel)]=\"item.Count\">\r\n                                <span class=\"input-group-btn\">\r\n                                  <button class=\"btn btn-secondary\" type=\"button\" (click)=\"item.Count=+item.Count+1;updatePrice();\"><i class=\" fa fa-plus\"></i></button>\r\n                                </span>\r\n                              </div>\r\n       <strong>{{item.Name}}</strong><strong class=\"pull-right\">{{item.Price}}$</strong>\r\n     </div>\r\n                            </li>\r\n                              </ul>\r\n                              <strong style=\"font-size:larger\">Total Price:{{TotalPrice}}</strong>\r\n                    </div>\r\n                    <button (click)=\"sendOrder()\" class=\"btn btn-primary\">Confirm Order</button>\r\n                </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"row\">\r\n    <div class=\"col-lg-7\">\r\n           <div class=\"card card-outline mb-3\">\r\n\r\n                    <div class=\"card-header card-primary\" style=\"font-size:15px;font-weight:bolder\">Available Products</div>\r\n\r\n                    <!--div class=\"input-group input-group-lg inner-addon left-addon\" style=\"width:100%\"><input type=\"search\" class=\"form-control input-lg\" (keyup)=\"filter()\" style=\"border-radius:0px\" name=\"\" placeholder=\"search\" [(ngModel)]=\"SearchTerm\" /><i style=\"z-index:55;\" class=\"fa fa-search searchIcon fa-lg\"></i><span *ngIf=\"SearchTerm.length>0\" (click)=\"clearSearch();\" class=\"fa fa-window-close fa-2x searchClear\"> </span></div-->\r\n                      <div *ngFor=\"let product of Products; let i = index\">\r\n                          <div class=\"card-block card-secondary\" style=\"padding:0;padding-left:10px;font-weight:strong;font-size:larger;\">{{product.Category}}</div>\r\n                    <div class=\"card-block\" style=\"padding:0\">\r\n                        <ul  [dragula]='\"fourth-bag\"' class=\"list-group list-group-flush\" [dragulaModel]='product.Items'>\r\n                            <li *ngFor=\"let item of product.Items; let j = index\" style=\"margin:5px;padding:14px;\" class=\"list-group-item item\">\r\n<button class=\"btn pull-right\" style=\"background-color:#1ab394;color:white;\" (click)=\"add(item,i,j)\">ADD</button>\r\n                               <strong style=\"font-size:larger\">{{ item.Name }} <span class=\"text-muted\">($ {{ item.Price}} )</span></strong>\r\n                            </li>\r\n                            </ul>\r\n                    </div>\r\n                </div>\r\n              </div>\r\n\r\n    </div>\r\n    <div class=\"col-lg-5\" >\r\n       <!--div class=\"affix\"-->\r\n          <div class=\"card card-outline mb-4\"style=\"padding:10px;\">\r\n                    <div class=\"card-header card-primary\" style=\"font-size:15px;font-weight:larger\">Your Order</div>\r\n<div class=\"form-group\">\r\n  <label for=\"exampleFormControlSelect1\">Branch{{SelectedBranch}}</label>\r\n  <select class=\"form-control\" id=\"exampleFormControlSelect1\" [(ngModel)]=\"SelectedBranch\">\r\n    <option *ngFor=\"let branch of Branches\" [ngValue]=\"branch.ID\">{{branch.Name}}</option>\r\n\r\n  </select>\r\n</div>\r\n<p>pickup date and time</p>\r\n                    <datetime [datepicker]=\"datepickerOpts\" [(ngModel)]=\"date\"></datetime>\r\n                    <p>Payment Method</p>\r\n                    <!-- <div class=\"custom-control custom-checkbox\">\r\n  <input type=\"checkbox\" class=\"custom-control-input\" id=\"customCheck1\">\r\n  <label class=\"custom-control-label\" for=\"customCheck1\">On pickup</label>\r\n</div>\r\n<div class=\"custom-control custom-checkbox\">\r\n  <input type=\"checkbox\" class=\"custom-control-input\" id=\"customCheck2\">\r\n  <label class=\"custom-control-label\" for=\"customCheck2\">Credit card</label>\r\n</div>\r\n<div class=\"custom-control custom-checkbox\">\r\n<input type=\"checkbox\" class=\"custom-control-input\" id=\"customCheck3\">\r\n<label class=\"custom-control-label\" for=\"customCheck3\">From Walet</label>\r\n</div> -->\r\n<div class=\"radio radio-danger\">\r\n   <input type=\"radio\" name=\"radio1\" id=\"radio1\" value=\"Wallet\" [(ngModel)]=\"PaymentMethod\" checked>\r\n    <label for=\"radio1\" style=\"font-size:smaller\">\r\n        From Wallet\r\n    </label>\r\n</div>\r\n<div class=\"radio radio-danger\">\r\n                                <input type=\"radio\" name=\"radio2\" id=\"radio2\" value=\"CreditCard\" [(ngModel)]=\"PaymentMethod\">\r\n                                <label for=\"radio2\" style=\"font-size:smaller\">\r\n                                    By Credit Card\r\n                                </label>\r\n</div>\r\n<div class=\"radio radio-danger\">\r\n                                <input type=\"radio\" name=\"radio3\" id=\"radio3\" value=\"OnPickup\" [(ngModel)]=\"PaymentMethod\">\r\n                                <label for=\"radio3\" style=\"font-size:smaller\">\r\n                                  On Pickup\r\n                                </label>\r\n</div>\r\n                     <div class=\"card-block\" style=\"padding:0\">\r\n                        <ul [dragula]='\"fourth-bag\"' class=\"list-group list-group-flush\" [dragulaModel]='OrderItems' style=\"height:130px;overflow-y:auto;\">\r\n                            <li  style=\"margin:5px;\" *ngFor=\"let item of OrderItems\" class=\"list-group-item item\">\r\n<div class=\"row\">\r\n  <div class=\"col col-8\">{{ item.Name }} <span class=\"text-muted\">($ {{ item.Price}} )</span>\r\n  </div>                      <div class=\"input-group col col-3\">\r\n                                <span class=\"input-group-btn\">\r\n                                  <button *ngIf=\"item.Count>1\" class=\"btn btn-secondary\" type=\"button\" (click)=\"item.Count=+item.Count-1;updatePrice();\"><i class=\"fa fa-minus\"></i></button>\r\n                                  <button *ngIf=\"item.Count==1\" class=\"btn btn-secondary\" type=\"button\" (click)=\"removeItem(item);\"><i class=\"fa fa-trash\"></i></button>\r\n                                </span>\r\n                                <input type=\"text\" class=\"form-control\" style=\"padding:3px 4px\" (change)=\"updatePrice();\" [(ngModel)]=\"item.Count\" (change)=\"item.Count=(item.Count>item.Quantity)?item.Quantity:item.Count;updatePrice();\">\r\n                                <span class=\"input-group-btn\">\r\n                                  <button class=\"btn btn-secondary\" [title]=\"((item.Unlimited)||item.Count<item.Quantity)?'add':'no more items to buy'\" [disabled]=\"!((item.Unlimited)||item.Count<item.Quantity)\" type=\"button\" (click)=\"item.Count=+item.Count+1;updatePrice();\"><i class=\" fa fa-plus\"></i></button>\r\n                                </span>\r\n                              </div>\r\n\r\n     </div>\r\n                            </li>\r\n                              </ul>\r\n                              <input class=\"form-control\" id=\"desc\" name=\"desc\" placeholder=\"Additional order notes\" [(ngModel)]=\"Description\" type=\"text\" value=\"\" /><br/>\r\n                              <div class=\"row\">\r\n                              <strong class=\"col col-9\">Total Price:{{TotalPrice}}</strong>\r\n                              <button (click)=\"sendOrder()\" class=\"btn btn-primary col col-2 col-\">Confirm Order</button>\r\n                            </div>\r\n                    </div>\r\n\r\n                </div>\r\n                <!--/div-->\r\n    </div>\r\n\r\n</div>\r\n<link href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" rel=\"stylesheet\">\r\n"
 
 /***/ }),
 
@@ -53,21 +53,68 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-//import { HttpService } from './sendOrder.service';
 
 let AppComponent = class AppComponent {
-    constructor(dragulaService, http) {
+    constructor(dragulaService, http, elm) {
         this.dragulaService = dragulaService;
         this.http = http;
+        this.id = -1;
+        this.Description = "";
+        this.date = null;
+        this.datepickerOpts = {
+            startDate: new Date(2016, 5, 10),
+            autoclose: true,
+            todayBtn: 'linked',
+            todayHighlight: true,
+            assumeNearbyYear: true,
+            format: 'D, d MM yyyy'
+        };
+        this.PaymentMethod = 'Wallet';
         this.OrderItems = [];
         this.Products = [];
+        this.Branches = [];
         this.TotalPrice = 0;
+        if (elm.nativeElement.getAttribute('id')) {
+            this.id = elm.nativeElement.getAttribute('id');
+            this.getOrder().subscribe((data) => {
+                this.date = new Date(data[0].PickupTime);
+                this.PaymentMethod = data[0].PaymentMethod;
+                this.SelectedBranch = data[0].Branch;
+                this.TotalPrice = data[0].TotalPrice;
+                this.Description = data[0].Description;
+                this.selected = data[0].items.reduce((a, b) => (a + (b.Product + ':' + b.Quantity + ',')), '');
+            });
+        }
+        else {
+            this.selected = elm.nativeElement.getAttribute('selected');
+        }
         this.getProducts().subscribe((data) => {
             this.Categories = [...new Set(data.map(item => item.fields.Category))];
             this.Categories.forEach((cat) => {
-                this.Products.push({ Category: cat, Items: data.filter(x => x.fields.Category == cat).map(item => new Product(item.pk, item.fields.Name, item.fields.Price, item.fields.Description)) });
+                this.Products.push({ Category: cat, Items: data.filter(x => x.fields.Category == cat).map(item => new Product(item.pk, item.fields.Name, item.fields.Price, item.fields.Description, cat, item.fields.Stock, item.fields.unlimited)) });
             });
+            if (this.selected) {
+                let selectedItems = this.selected.split(',');
+                selectedItems.forEach(s => {
+                    if (s.split(':').length == 2) {
+                        let ID = parseInt(s.split(':')[0]);
+                        let count = parseInt(s.split(':')[1]);
+                        var i = 0;
+                        this.Products.forEach(product => {
+                            if (this.Products[i].Items.filter(x => x.ID == ID).length > 0) {
+                                let itemIndex = this.Products[i].Items.indexOf(this.Products[i].Items.filter(x => x.ID == ID)[0]);
+                                this.add(this.Products[i].Items.filter(x => x.ID == ID)[0], i, itemIndex, count);
+                            }
+                            i++;
+                        });
+                    }
+                });
+            }
             //data.filter(p => p.fields.Category==cat).map(x=>new Product(x.pk,x.fields.Name,x.fields.Price,x.fields.Description)))});
+        });
+        this.getBranches().subscribe((data) => {
+            this.SelectedBranch = data[0].pk;
+            this.Branches = data.map(branch => { return { ID: branch.pk, Name: branch.fields.Name }; });
         });
         dragulaService.setOptions('fourth-bag', {
             revertOnSpill: true
@@ -81,38 +128,42 @@ let AppComponent = class AppComponent {
             .map((res) => res.json())
             .catch((err, caught) => { return __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__["a" /* Observable */].throw(caught); });
     }
-    add(item, CategoryIndex, ItemIndex) {
+    getOrder() {
+        return this.http.get("./getOrder?id=" + this.id)
+            .map((res) => res.json())
+            .catch((err, caught) => { return __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__["a" /* Observable */].throw(caught); });
+    }
+    getBranches() {
+        return this.http.get("./getBranches")
+            .map((res) => res.json())
+            .catch((err, caught) => { return __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__["a" /* Observable */].throw(caught); });
+    }
+    add(item, CategoryIndex, ItemIndex, count = 1) {
         this.Products[CategoryIndex].Items.splice(ItemIndex, 1);
-        item.Count = 1;
+        item.Count = count < item.Quantity ? count : item.Quantity;
         this.OrderItems.push(item);
-        this.TotalPrice = this.TotalPrice + item.Price;
+        this.updatePrice();
+    }
+    removeItem(item) {
+        let ItemIndex = this.OrderItems.indexOf(item);
+        this.Products.filter(p => p.Category == item.Category)[0].Items.push(item);
+        // this.Products[CategoryIndex].Items.push(item);
+        this.OrderItems.splice(ItemIndex, 1);
+        this.updatePrice();
     }
     updatePrice() {
         this.TotalPrice = this.OrderItems.reduce((a, b) => (a + (b.Count * b.Price)), 0);
     }
     sendOrder() {
-        this.sendOrderMethod().subscribe((data) => console.log(data));
+        this.sendOrderMethod().subscribe((data) => window.location.replace("../orders"));
     }
     sendOrderMethod() {
         let headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
         let options = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["e" /* RequestOptions */]({ headers: headers });
-        let body = JSON.stringify(this.OrderItems);
-        return this.http.post('./sendOrder', body, options).map((res) => res.json());
-        /*
-        this._httpservice.sendData(
-                 {
-                     "OrderItems": this.OrderItems
-      
-                 }
-      
-             ).subscribe(
-      
-                 response => {console.log(response)
-                    // if (response == "Success") { window.location.replace("../index") }
-                 }, // success
-                 error => console.log(error),       // error
-                 () => console.log('completed')     // complete
-               );*/
+        let order = { Branch: this.SelectedBranch, PaymentMethod: this.PaymentMethod, PickupTime: this.date, OrderItems: this.OrderItems, Description: this.Description, Price: this.TotalPrice };
+        console.log(order);
+        let body = JSON.stringify(order);
+        return this.http.post('./sendOrder?id=' + this.id, body, options).map((res) => res.json());
     }
 };
 AppComponent = __decorate([
@@ -121,15 +172,18 @@ AppComponent = __decorate([
         template: __webpack_require__("./src/app/app.component.html"),
         styles: [__webpack_require__("./src/app/app.component.css")]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ng2_dragula_ng2_dragula__["DragulaService"], __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2_ng2_dragula_ng2_dragula__["DragulaService"], __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]])
 ], AppComponent);
 
 class Product {
-    constructor(ID, Name, Price, Description) {
+    constructor(ID, Name, Price, Description, Category, Quantity, Unlimited) {
         this.ID = ID;
         this.Name = Name;
         this.Price = Price;
         this.Description = Description;
+        this.Category = Category;
+        this.Quantity = Quantity;
+        this.Unlimited = Unlimited;
         this.Count = 1;
     }
 }
@@ -152,12 +206,20 @@ class Product {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__("./src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__angular_common_http__ = __webpack_require__("./node_modules/@angular/common/esm2015/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_bootstrap_datepicker_dist_js_bootstrap_datepicker_min_js__ = __webpack_require__("./node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_bootstrap_datepicker_dist_js_bootstrap_datepicker_min_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_bootstrap_datepicker_dist_js_bootstrap_datepicker_min_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_bootstrap_timepicker_js_bootstrap_timepicker_js__ = __webpack_require__("./node_modules/bootstrap-timepicker/js/bootstrap-timepicker.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_bootstrap_timepicker_js_bootstrap_timepicker_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_bootstrap_timepicker_js_bootstrap_timepicker_js__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_ng2_datetime_ng2_datetime_js__ = __webpack_require__("./node_modules/ng2-datetime/ng2-datetime.js");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
 
 
 
@@ -178,7 +240,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__angular_http__["d" /* JsonpModule */],
             __WEBPACK_IMPORTED_MODULE_4_ng2_dragula_ng2_dragula__["DragulaModule"],
             __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */],
-            __WEBPACK_IMPORTED_MODULE_6__angular_common_http__["a" /* HttpClientModule */]
+            __WEBPACK_IMPORTED_MODULE_6__angular_common_http__["a" /* HttpClientModule */],
+            __WEBPACK_IMPORTED_MODULE_9_ng2_datetime_ng2_datetime_js__["a" /* NKDatetimeModule */]
         ],
         providers: [__WEBPACK_IMPORTED_MODULE_6__angular_common_http__["a" /* HttpClientModule */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]

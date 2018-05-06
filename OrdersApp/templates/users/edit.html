@@ -1,0 +1,12 @@
+	{% extends 'layout.html' %} 
+{% block 'body' %}
+    <h1>choose user to add wallet</h1>
+    
+    <form action="" method="Post">
+        {% csrf_token %}
+		<table>
+        {{ form }}
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+{% endblock %}

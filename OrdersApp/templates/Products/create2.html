@@ -1,9 +1,9 @@
-	
-	{% extends 'layout.html' %} 
+
+	{% extends 'layout.html' %}
 {% block 'body' %}
     <h1>New Product</h1>
-    
-    <form action="" method="post">
+
+    <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
         {{ form }}

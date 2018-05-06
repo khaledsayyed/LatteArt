@@ -21,12 +21,18 @@
       "prefix": "app",
       "styles": [
         "styles.css",
-		"../node_modules/dragula/dist/dragula.css"
+		 "../node_modules/dragula/dist/dragula.css",
+     "../node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css",
+      "../node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css",
+	  "../node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
       ],
       "scripts": [
-	  "../node_modules/dragula/dist/dragula.js"
+	  "../node_modules/dragula/dist/dragula.js",
+    "../node_modules/jquery/dist/jquery.min.js",
+    "../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
+    "../node_modules/bootstrap-timepicker/js/bootstrap-timepicker.js"
 	  ],
-	  
+
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
@@ -50,14 +56,43 @@
       "prefix": "app2",
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
-	  "styles": [],
+	    "styles": [
+	  "../node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
+	  ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
-	}
+	},
+{
+    "name":"app3",
+    "root":"src",
+    "outDir":"dist3",
+    "assets": [
+      "assets",
+      "favicon.ico"
+    ],
+    "main":"main3.ts",
+    "index": "index2.html",
+    "polyfills":"polyfills.ts",
+    "test": "test.ts",
+    "tsconfig": "tsconfig.app.json",
+    "testTsconfig": "tsconfig.spec.json",
+    "prefix": "app3",
+    "tsconfig": "tsconfig.app.json",
+    "testTsconfig": "tsconfig.spec.json",
+    "styles": [
+  "../node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css"
+  ],
+    "scripts": [],
+    "environmentSource": "environments/environment.ts",
+    "environments": {
+      "dev": "environments/environment.ts",
+      "prod": "environments/environment.prod.ts"
+    }
+}
   ],
   "e2e": {
     "protractor": {

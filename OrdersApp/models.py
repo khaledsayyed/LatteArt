@@ -2,9 +2,9 @@ from django.db import models
 from django.core.validators import RegexValidator
 #from django_mysql.models import ListTextField
 PAYMENTMETHODS = (
-    ('Credit Card', 'Credit Card'),
-    ('From Wallet', 'From Wallet'),
-    ('On Pickup', 'On Pickup'),
+    ('CreditCard', 'Credit Card'),
+    ('Wallet', 'From Wallet'),
+    ('OnPickup', 'On Pickup'),
 )
 
 CATEGORY=(
@@ -29,8 +29,9 @@ class CustomerProfile(models.Model):
 	Name = models.CharField(max_length=100)
 	UserName = models.CharField(max_length=100)
 	Password = models.CharField(max_length=100)
-	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
-	PhoneNumber=models.CharField(max_length=8, validators=[phone_regex],blank=False)
+	Email=models.EmailField(max_length=100, blank=False, unique=True)
+	PhoneNumber=models.CharField(max_length=8,blank=False)
+	Wallet = models.IntegerField(default=0)
 	#add credit card information
 
 class Product(models.Model):
@@ -38,7 +39,9 @@ class Product(models.Model):
 	Name = models.CharField(max_length=100)
 	Price = models.IntegerField()
 	Description = models.CharField(max_length=300)
-#	Image=models.ImageField (upload_to = 'products_images')
+	Stock = models.IntegerField(default = 1)
+	unlimited = models.BooleanField(default = False)
+	Image=models.ImageField (upload_to = 'products_images', default = 'products_images/no-img.jpg',blank=True, null=True)
 
 
 class Branch(models.Model):
@@ -48,20 +51,21 @@ class Branch(models.Model):
 	#ListOfEmployees=models.ListTextField(base_field=models.Employee())
 	ImageID=models.ImageField(upload_to= 'Branch_images')
 
-class OrderItem(models.Model):
-    Product = models.ForeignKey(Product,on_delete=models.CASCADE)
-    Quantity = models.IntegerField()
-
 class Order(models.Model):
-	Customer = models.ForeignKey(CustomerProfile,on_delete=models.CASCADE)
-	Products = models.ManyToManyField(OrderItem)
-	PickupTime = models.DateTimeField(auto_now=True)
-	PaymentMethod = models.CharField(default=2, max_length=1, choices=PAYMENTMETHODS)
+	#Customer = models.ForeignKey(CustomerProfile,on_delete=models.CASCADE)
+	PickupTime = models.DateTimeField(auto_now=False)
+	PaymentMethod = models.CharField(default=2, max_length=100, choices=PAYMENTMETHODS)
 	#order ID will be automatically generated
 	Branch=models.ForeignKey(Branch, on_delete=models.CASCADE)
 	TotalPrice=models.IntegerField()
 	Description = models.CharField(max_length=300)
 	OrderStatus=models.IntegerField(default=0, choices=ORDERSTATUS)
+
+class OrderItem(models.Model):
+    Order=models.ForeignKey(Order, related_name="items", null=True, blank=True,on_delete=models.CASCADE)
+    Product = models.ForeignKey(Product,on_delete=models.CASCADE, related_name='products')
+    Quantity = models.IntegerField()
+
 
 class Employee(models.Model):
 	Name=models.CharField(max_length=100)

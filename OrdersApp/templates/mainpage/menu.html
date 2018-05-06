@@ -1,11 +1,12 @@
-
-		{% extends 'layout.html' %} 
+{% extends 'layout.html' %}
 {% block 'body' %}
-{% load table_tags %}
-    <body>
-        <div class="container" style="margin-top: 10px">
-            <h1>Menu</h1>
-            <br />
-            {% render_table products-menu %}
-        </div>
+{% load staticfiles %}
+ <h1>Menu</h1>
+     <view-menu>Loading...</view-menu>
+
+<script type="text/javascript" src="{% static 'MenuAngular/inline.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'MenuAngular/polyfills.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'MenuAngular/styles.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'MenuAngular/vendor.bundle.js' %}"></script>
+<script type="text/javascript" src="{% static 'MenuAngular/main.bundle.js' %}"></script>
 {% endblock %}

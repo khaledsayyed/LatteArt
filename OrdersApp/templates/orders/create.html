@@ -1,11 +1,15 @@
-{% extends 'layout.html' %} 
+{% extends 'layout.html' %}
 {% block 'body' %}
 {% load staticfiles %}
+<script type="text/javascript" src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap-timepicker.min.js' %}"></script>
+<link href="{% static 'css/bootstrap-datepicker.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/bootstrap-timepicker.min.css' %}" rel="stylesheet">
 
     <h1>New Order</h1>
 
-     <new-order>Loading...</new-order>
-	 	
+     <new-order selected="{{ selectedOrders }}" id={{id}}>Loading...</new-order>
+
 <script type="text/javascript" src="{% static 'NewOrderAngular/inline.bundle.js' %}"></script>
 <script type="text/javascript" src="{% static 'NewOrderAngular/polyfills.bundle.js' %}"></script>
 <script type="text/javascript" src="{% static 'NewOrderAngular/styles.bundle.js' %}"></script>

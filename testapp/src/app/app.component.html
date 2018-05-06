@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-lg-9">
+    <div class="col-lg-7">
            <div class="card card-outline mb-3">
 
                     <div class="card-header card-primary" style="font-size:15px;font-weight:bolder">Available Products</div>
@@ -11,7 +11,7 @@
                         <ul  [dragula]='"fourth-bag"' class="list-group list-group-flush" [dragulaModel]='product.Items'>
                             <li *ngFor="let item of product.Items; let j = index" style="margin:5px;padding:14px;" class="list-group-item item">
 <button class="btn pull-right" style="background-color:#1ab394;color:white;" (click)="add(item,i,j)">ADD</button>
-                               <strong style="font-size:larger">{{item.Name}} , {{item.Price}}$</strong>
+                               <strong style="font-size:larger">{{ item.Name }} <span class="text-muted">($ {{ item.Price}} )</span></strong>
                             </li>
                             </ul>
                     </div>
@@ -19,32 +19,79 @@
               </div>
 
     </div>
-    <div class="col-lg-3">
-       <div class="affix">
-          <div class="card card-outline mb-4">
+    <div class="col-lg-5" >
+       <!--div class="affix"-->
+          <div class="card card-outline mb-4"style="padding:10px;">
                     <div class="card-header card-primary" style="font-size:15px;font-weight:larger">Your Order</div>
-<input type="text" class="form-control input-lg" placeholder="Pickup Time"/>
+<div class="form-group">
+  <label for="exampleFormControlSelect1">Branch{{SelectedBranch}}</label>
+  <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="SelectedBranch">
+    <option *ngFor="let branch of Branches" [ngValue]="branch.ID">{{branch.Name}}</option>
+
+  </select>
+</div>
+<p>pickup date and time</p>
+                    <datetime [datepicker]="datepickerOpts" [(ngModel)]="date"></datetime>
+                    <p>Payment Method</p>
+                    <!-- <div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="customCheck1">
+  <label class="custom-control-label" for="customCheck1">On pickup</label>
+</div>
+<div class="custom-control custom-checkbox">
+  <input type="checkbox" class="custom-control-input" id="customCheck2">
+  <label class="custom-control-label" for="customCheck2">Credit card</label>
+</div>
+<div class="custom-control custom-checkbox">
+<input type="checkbox" class="custom-control-input" id="customCheck3">
+<label class="custom-control-label" for="customCheck3">From Walet</label>
+</div> -->
+<div class="radio radio-danger">
+   <input type="radio" name="radio1" id="radio1" value="Wallet" [(ngModel)]="PaymentMethod" checked>
+    <label for="radio1" style="font-size:smaller">
+        From Wallet
+    </label>
+</div>
+<div class="radio radio-danger">
+                                <input type="radio" name="radio2" id="radio2" value="CreditCard" [(ngModel)]="PaymentMethod">
+                                <label for="radio2" style="font-size:smaller">
+                                    By Credit Card
+                                </label>
+</div>
+<div class="radio radio-danger">
+                                <input type="radio" name="radio3" id="radio3" value="OnPickup" [(ngModel)]="PaymentMethod">
+                                <label for="radio3" style="font-size:smaller">
+                                  On Pickup
+                                </label>
+</div>
                      <div class="card-block" style="padding:0">
-                        <ul [dragula]='"fourth-bag"' class="list-group list-group-flush" [dragulaModel]='OrderItems' style="height:400px;overflow-y:auto;">
+                        <ul [dragula]='"fourth-bag"' class="list-group list-group-flush" [dragulaModel]='OrderItems' style="height:130px;overflow-y:auto;">
                             <li  style="margin:5px;" *ngFor="let item of OrderItems" class="list-group-item item">
 <div class="row">
-                              <div class="input-group col col-4">
+  <div class="col col-8">{{ item.Name }} <span class="text-muted">($ {{ item.Price}} )</span>
+  </div>                      <div class="input-group col col-3">
                                 <span class="input-group-btn">
-                                  <button class="btn btn-secondary" type="button" (click)="item.Count=+item.Count-1;updatePrice();"><i class="fa fa-minus"></i></button>
+                                  <button *ngIf="item.Count>1" class="btn btn-secondary" type="button" (click)="item.Count=+item.Count-1;updatePrice();"><i class="fa fa-minus"></i></button>
+                                  <button *ngIf="item.Count==1" class="btn btn-secondary" type="button" (click)="removeItem(item);"><i class="fa fa-trash"></i></button>
                                 </span>
-                                <input type="text" class="form-control" style="padding:3px 4px" (change)="updatePrice();" [(ngModel)]="item.Count">
+                                <input type="text" class="form-control" style="padding:3px 4px" (change)="updatePrice();" [(ngModel)]="item.Count" (change)="item.Count=(item.Count>item.Quantity)?item.Quantity:item.Count;updatePrice();">
                                 <span class="input-group-btn">
-                                  <button class="btn btn-secondary" type="button" (click)="item.Count=+item.Count+1;updatePrice();"><i class=" fa fa-plus"></i></button>
+                                  <button class="btn btn-secondary" [title]="((item.Unlimited)||item.Count<item.Quantity)?'add':'no more items to buy'" [disabled]="!((item.Unlimited)||item.Count<item.Quantity)" type="button" (click)="item.Count=+item.Count+1;updatePrice();"><i class=" fa fa-plus"></i></button>
                                 </span>
                               </div>
-       <strong>{{item.Name}}</strong><strong class="pull-right">{{item.Price}}$</strong>
+
      </div>
                             </li>
                               </ul>
-                              <strong style="font-size:larger">Total Price:{{TotalPrice}}</strong>
+                              <input class="form-control" id="desc" name="desc" placeholder="Additional order notes" [(ngModel)]="Description" type="text" value="" /><br/>
+                              <div class="row">
+                              <strong class="col col-9">Total Price:{{TotalPrice}}</strong>
+                              <button (click)="sendOrder()" class="btn btn-primary col col-2 col-">Confirm Order</button>
+                            </div>
                     </div>
-                    <button (click)="sendOrder()" class="btn btn-primary">Confirm Order</button>
+
                 </div>
-        </div>
+                <!--/div-->
     </div>
+
 </div>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">

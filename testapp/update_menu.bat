@@ -1,0 +1,1 @@
+ng build --app app2 --watch true --output-path "../OrdersApp/static/MenuAngular"

@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div style="margin: auto;  margin-top:50px">
+    <data-table id="orders-grid"
+        [items]="ordersdata"
+        [itemCount]="ordersCount"
+        (reload)="reloadFilms($event)"
+
+        [limit]="8"
+        [sortBy]="'id'"
+        [sortAsc]="false"
+
+        [selectColumn]="true"
+        [multiSelect]="false"
+        [substituteRows]="false"
+        [expandableRows]="true"
+        [translations]="translations"
+        [indexColumnHeader]="'#'"
+        [selectOnRowClick]="true"
+        >
+        <ng-template #dataTableExpand let-item="item">
+        <div [textContent]="item.Description" style="padding: 5px; color: gray"></div>
+        </ng-template>
+        <data-table-column
+            [property]="'id'"
+            [header]="'ID'"
+            [sortable]="true">
+        </data-table-column>
+        <data-table-column
+            [property]="'PickupTime'"
+            [header]="'Pickup Time'"
+            [sortable]="true">
+        </data-table-column>
+        <data-table-column
+            [property]="'PaymentMethod'"
+            [header]="'Payment'"
+            [sortable]="false">
+        </data-table-column>
+        <data-table-column
+            [property]="'Branch'"
+            [header]="'Branch'">
+        </data-table-column>
+        <data-table-column
+            [property]="'TotalPrice'"
+            [header]="'Total Price'">
+        </data-table-column>
+        <data-table-column
+            [property]="'OrderStatus'"
+            [header]="'Order Status'">
+            <ng-template #dataTableCell let-item="item">
+              <select class="form-control" id="ok1" [(ngModel)]="item.OrderStatus" (change)="updateStatus(item.id,item.OrderStatus)">
+                <option *ngFor="let status of orderStatus" [ngValue]="status.ID">{{status.Name}}</option>
+
+              </select>
+       <!-- <input type="number" [(ngModel)]="item.year" class="form-control input-sm" style="width: 75px"/> -->
+     </ng-template>
+        </data-table-column>
+        <data-table-column
+            [header]="'Actions'">
+        <ng-template #dataTableHeader let-item="item">
+        <i>Actions</i>
+      </ng-template>
+      <ng-template #dataTableCell let-item="item">
+        <a [href]="'orders/edit?id='+item.id" class="btn btn-sm btn-primary">Edit</a>
+        <a [href]="'orders/delete?id='+item.id" class="btn btn-sm btn-warning">Delete</a>
+      </ng-template>
+          </data-table-column>
+    </data-table>
+
+</div>
+</div>
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">

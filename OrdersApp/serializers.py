@@ -1,10 +1,15 @@
 from rest_framework import serializers
-from .models import Product
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
-    Category = serializers.CharField(source='get_Category_display')
+from .models import *
 
+class itemsSerializer(serializers.ModelSerializer):
+    Product_Name = serializers.CharField(source='Product.Name', read_only=True)
     class Meta:
-        model = Product
+        model = OrderItem
+        fields = ('id','Product','Product_Name', 'Quantity')
 
-    def get_Category(self,obj):
-        return obj.get_Category_display()
+class orderSerializer(serializers.ModelSerializer):
+    items = itemsSerializer(many=True)
+    Branch_Name = serializers.CharField(source='Branch.Name', read_only=True)
+    class Meta:
+        model = Order
+        fields = ('id','PickupTime','PaymentMethod','Branch','Branch_Name','TotalPrice','Description','OrderStatus','items')
