@@ -18,7 +18,13 @@
         [selectOnRowClick]="true"
         >
         <ng-template #dataTableExpand let-item="item">
-        <div [textContent]="item.Description" style="padding: 5px; color: gray"></div>
+        <div style="padding: 5px; color: gray">
+          <ul>items
+            <li>hi</li>
+          </ul>
+<div [textContent]="item.Description">
+</div>
+        </div>
         </ng-template>
         <data-table-column
             [property]="'id'"
@@ -43,7 +49,7 @@
             [property]="'TotalPrice'"
             [header]="'Total Price'">
         </data-table-column>
-        <data-table-column
+        <data-table-column *ngIf="canEdit"
             [property]="'OrderStatus'"
             [header]="'Order Status'">
             <ng-template #dataTableCell let-item="item">

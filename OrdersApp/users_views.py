@@ -2,8 +2,8 @@ from django.shortcuts import render
 from OrdersApp.tables import UserTable
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from .models import CustomerProfile		
-from. forms import EditWalletForm										  
+from .models import CustomerProfile
+from. forms import EditWalletForm
 
 def users(request):
 	users = UserTable()
@@ -22,3 +22,8 @@ def edit_wallet(request,id):
 	else:
 		form =EditWalletForm(initial={'Name':inst_user.Name,'Wallet':inst_user.Wallet })
 	return render(request, 'users/edit.html', {'form': form})
+
+def delete_p(request,id):
+	prr = CustomerProfile.objects.get(id = id)
+	prr.delete()
+	return HttpResponseRedirect(reverse('users') )

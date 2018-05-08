@@ -15,7 +15,10 @@ def products(request):
 	return render(request,"index.html")
 
 def orders(request):
-	return render(request, "orders/index.html")
+	edit = False
+	if request.session['role'] == "manager" or request.session['role'] == "employee":
+		edit = True
+	return render(request, "orders/index.html",{'edit':edit})
 
 def create(request):
 	return render(request, 'orders/create.html',{'selectedOrders': request.GET.get('selected')})
@@ -50,11 +53,13 @@ def getOrder(request):
 	return HttpResponse(data, content_type='application/json')
 
 def getOrders(request):
-	#serializer_class = orderSerializer
-	orders =Order.objects.all()
-	# orderItems = OrderItem.objects.all()
-	# AllOrders = json.dumps({"orders":serializers.serialize("json", orders),"items":serializers.serialize("json", orderItems)})
-	#data = serializers.serialize("json", orders)
+	orders = None
+	if request.session['role'] == "manager":
+		orders =Order.objects.all()
+	elif request.session['role'] == "employee":
+		orders =Order.objects.filter(Branch =request.session["branch"] )
+	elif request.session['role'] == "customer":
+		orders =Order.objects.filter(Customer_UserName =request.session["username"] )
 	data = JSONRenderer().render(orderSerializer(orders, many=True).data)
 	return HttpResponse(data, content_type='application/json')
 
@@ -70,6 +75,7 @@ def sendOrder(request):
 		new_order.OrderStatus = 0
 		new_order.Branch_id=order_json["Branch"]
 		new_order.PickupTime =order_json["PickupTime"]
+		new_order.Customer =  CustomerProfile.objects.get(UserName=request.session['username']).UserName
 		new_order.save()
 		items = OrderItem.objects.filter(id=request.GET.get('id'))
 		for item in items:

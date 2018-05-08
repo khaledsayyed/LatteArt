@@ -19,38 +19,39 @@
 <body>
 		<ul class="navbar">
 		<li><a class="active" href="http://localhost:8000/OrdersApp/mainpage"><i class="fa fa-home"></i></a>
-		
+
 		{% ifequal request.session.role "guest" %}
             <li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
 			<li onclick="document.getElementById('id01').style.display='block'"><a>Login</a></li>
 		{% endifequal %}
-		
+
 		{% ifequal request.session.role "customer"%}
 			 <li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
-             <li><a href="http://localhost:8000/OrdersApp/orders">Myorders</a></li>
+        <li><a href="http://localhost:8000/OrdersApp/orders">Myorders</a></li>
 			 <li><a href="http://localhost:8000/OrdersApp/logout">Logout</a></li>
 			<!-->profile<-->
 	    {% endifequal %}
-		
+
 	    {% ifequal request.session.role "manager" %}
 			<li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
 			<li><a href="http://localhost:8000/OrdersApp/products">Products</a></li>
             <li><a href="http://localhost:8000/OrdersApp/employees">Employees</a></li>
 			<li><a href="http://localhost:8000/OrdersApp/logout">Logout</a></li>
+			    <li><a href="http://localhost:8000/OrdersApp/orders">All orders</a></li>
 			<!-->customers
 				orders<-->
 	    {% endifequal %}
-	    
+
 		{% ifequal request.session.role "employee" %}
 			<li><a href="http://localhost:8000/OrdersApp/menu">Menu</a></li>
 			<li><a href="http://localhost:8000/OrdersApp/products">Products</a></li>
 			<li><a href="http://localhost:8000/OrdersApp/users">users</a></li>
-
+  <li><a href="http://localhost:8000/OrdersApp/orders">Branch orders</a></li>
 			<li><a href="http://localhost:8000/OrdersApp/logout">Logout</a></li>
 			<!-->customers
-				orders<-->	    
+				orders<-->
 		{% endifequal %}
-		
+
 		<li><a  href="http://localhost:8000/OrdersApp/mainpage#aboutus">About us</a></li>
 
         </ul>
@@ -65,24 +66,29 @@
     </div> -->
 
     <div class="container">
-      <label for="uname"><b>Username</b></label><br/>
-
-
-      <input type="text" placeholder="Enter Username" name="uname" required style="width:55%"><br/>
-
-      <label for="psw"><b>Password</b></label><br/>
-      <input type="password" placeholder="Enter Password" name="psw" required style="width:55%"><br/>
-        
-      <button type="submit"  style="width:30%">Login</button>
+			<div class=" form-horizantal">
+  <div class="form-group row">
+		      <label for="uname" class="col col-2">Username:</label>
+					<div class="control-label  col col-10">
+		      <input type="text" name="uname" class="form-control" placeholder="Enter Username" required>
+				</div>
+		   </div>
+  <div class="form-group row">
+		      <label for="psw" class="col col-2">Password:</label>
+					<div class="control-label  col col-10">
+		      <input type="password" name="psw" class="form-control" placeholder="Enter Password" required>
+				</div>
+		   </div>
+      <button type="submit" class="btn btn-primary" style="width:30%">Login</button>
       <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me 
+      <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>
       <br/>
       <br/>
       <br/>
       <label for="signup"><b>Not A user?  Sign Up</b></label>
       <br/>
-      <button type="text" onClick="location.href='signup'" style="width:30%">SignUp</button>
+      <a type="text" href="signup" style="width:20%" class="btn btn-primary">SignUp</a>
 
     </div>
 
@@ -90,6 +96,7 @@
       <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
       <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
+		</div>
   </form>
 </div>
 

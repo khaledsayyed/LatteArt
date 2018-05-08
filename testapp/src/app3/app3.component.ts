@@ -1,4 +1,4 @@
-import { Component, ViewChild} from '@angular/core';
+import { Component, ViewChild,ElementRef} from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { DataTable, DataTableTranslations, DataTableResource } from 'angular5-data-table';
 import { Observable } from 'rxjs/Rx';
@@ -8,14 +8,17 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./app3.component.css']
 })
 export class App3Component {
+
   ordersdata:any[] ;
+  canEdit:boolean=false;
   orderStatus = [	{ID:0, Name:'Received'},{ID:1,Name: 'Cooking'},{ID:2, Name:'Ready'}];
   ordersResource;
     ordersCount = 0;
 
     @ViewChild(DataTable) ordersTable;
 
-    constructor( private http: Http) {
+    constructor( private http: Http, elm: ElementRef){
+      this.canEdit  = elm.nativeElement.getAttribute('edit');
          this.getOrders().subscribe((data) => {
             this.ordersdata = data.map(x=>{return {id:x.id,PickupTime:x.PickupTime.substring(0, 10),PaymentMethod:x.PaymentMethod,Branch:x.Branch_Name,TotalPrice:x.TotalPrice,Description:'Items: '+x.items.reduce((a,b)=>(a+(b.Product_Name+':'+b.Quantity)+'|'),'')+'Additional Notes:'+x.Description,OrderStatus:x.OrderStatus};});
             this.ordersResource = new DataTableResource(this.ordersdata);

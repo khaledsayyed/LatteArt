@@ -8,6 +8,7 @@ from . import product_views
 from . import signupview
 urlpatterns = [
 	path('users', users_views.users, name='users'),
+	path(r'^users/delete/(?P<id>\d+)/$', users_views.delete_p, name= 'delete_user'),
 	path('orders', orders_views.orders, name='orders'),
 	path('orders/new', orders_views.create, name='new_order'),
 	path('orders/getAllProducts', orders_views.getAllProducts, name='getAllProducts'),

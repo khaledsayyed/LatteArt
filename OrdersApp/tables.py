@@ -13,7 +13,8 @@ class UserTable(Table):
 	Email = Column(field='Email', header=u'Email')
 	PhoneNumber =  Column(field='PhoneNumber', header=u'PhoneNumber')
 	Wallet = Column(field='Wallet', header=u'Wallet')
-	Edit = LinkColumn(header=u'Edit', links=[Link(text=u'Edit', viewname="edit_wallet", args=(A('id'),))])																								   
+	Edit = LinkColumn(header=u'Edit', links=[Link(text=u'Edit', viewname="edit_wallet", args=(A('id'),))])
+	Delete = LinkColumn(header=u'Delete', links=[Link(text=u'Delete', viewname="delete_user", args=(A('id'),))])																						   
 	class Meta:
 		model = CustomerProfile
 

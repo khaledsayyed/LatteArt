@@ -27,7 +27,7 @@ module.exports = ""
 /***/ "./src/app3/app3.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\r\n  <div style=\"margin: auto;  margin-top:50px\">\r\n    <data-table id=\"orders-grid\"\r\n        [items]=\"ordersdata\"\r\n        [itemCount]=\"ordersCount\"\r\n        (reload)=\"reloadFilms($event)\"\r\n\r\n        [limit]=\"8\"\r\n        [sortBy]=\"'id'\"\r\n        [sortAsc]=\"false\"\r\n\r\n        [selectColumn]=\"true\"\r\n        [multiSelect]=\"false\"\r\n        [substituteRows]=\"false\"\r\n        [expandableRows]=\"true\"\r\n        [translations]=\"translations\"\r\n        [indexColumnHeader]=\"'#'\"\r\n        [selectOnRowClick]=\"true\"\r\n        >\r\n        <ng-template #dataTableExpand let-item=\"item\">\r\n        <div [textContent]=\"item.Description\" style=\"padding: 5px; color: gray\"></div>\r\n        </ng-template>\r\n        <data-table-column\r\n            [property]=\"'id'\"\r\n            [header]=\"'ID'\"\r\n            [sortable]=\"true\">\r\n        </data-table-column>\r\n        <data-table-column\r\n            [property]=\"'PickupTime'\"\r\n            [header]=\"'Pickup Time'\"\r\n            [sortable]=\"true\">\r\n        </data-table-column>\r\n        <data-table-column\r\n            [property]=\"'PaymentMethod'\"\r\n            [header]=\"'Payment'\"\r\n            [sortable]=\"false\">\r\n        </data-table-column>\r\n        <data-table-column\r\n            [property]=\"'Branch'\"\r\n            [header]=\"'Branch'\">\r\n        </data-table-column>\r\n        <data-table-column\r\n            [property]=\"'TotalPrice'\"\r\n            [header]=\"'Total Price'\">\r\n        </data-table-column>\r\n        <data-table-column\r\n            [property]=\"'OrderStatus'\"\r\n            [header]=\"'Order Status'\">\r\n            <ng-template #dataTableCell let-item=\"item\">\r\n              <select class=\"form-control\" id=\"ok1\" [(ngModel)]=\"item.OrderStatus\" (change)=\"updateStatus(item.id,item.OrderStatus)\">\r\n                <option *ngFor=\"let status of orderStatus\" [ngValue]=\"status.ID\">{{status.Name}}</option>\r\n\r\n              </select>\r\n       <!-- <input type=\"number\" [(ngModel)]=\"item.year\" class=\"form-control input-sm\" style=\"width: 75px\"/> -->\r\n     </ng-template>\r\n        </data-table-column>\r\n        <data-table-column\r\n            [header]=\"'Actions'\">\r\n        <ng-template #dataTableHeader let-item=\"item\">\r\n        <i>Actions</i>\r\n      </ng-template>\r\n      <ng-template #dataTableCell let-item=\"item\">\r\n        <a [href]=\"'orders/edit?id='+item.id\" class=\"btn btn-sm btn-primary\">Edit</a>\r\n        <a [href]=\"'orders/delete?id='+item.id\" class=\"btn btn-sm btn-warning\">Delete</a>\r\n      </ng-template>\r\n          </data-table-column>\r\n    </data-table>\r\n\r\n</div>\r\n</div>\r\n<link href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" rel=\"stylesheet\">\r\n"
+module.exports = "<div class=\"container-fluid\">\r\n  <div style=\"margin: auto;  margin-top:50px\">\r\n    <data-table id=\"orders-grid\"\r\n        [items]=\"ordersdata\"\r\n        [itemCount]=\"ordersCount\"\r\n        (reload)=\"reloadFilms($event)\"\r\n\r\n        [limit]=\"8\"\r\n        [sortBy]=\"'id'\"\r\n        [sortAsc]=\"false\"\r\n\r\n        [selectColumn]=\"true\"\r\n        [multiSelect]=\"false\"\r\n        [substituteRows]=\"false\"\r\n        [expandableRows]=\"true\"\r\n        [translations]=\"translations\"\r\n        [indexColumnHeader]=\"'#'\"\r\n        [selectOnRowClick]=\"true\"\r\n        >\r\n        <ng-template #dataTableExpand let-item=\"item\">\r\n        <div style=\"padding: 5px; color: gray\">\r\n          <ul>items\r\n            <li>hi</li>\r\n          </ul>\r\n<div [textContent]=\"item.Description\">\r\n</div>\r\n        </div>\r\n        </ng-template>\r\n        <data-table-column\r\n            [property]=\"'id'\"\r\n            [header]=\"'ID'\"\r\n            [sortable]=\"true\">\r\n        </data-table-column>\r\n        <data-table-column\r\n            [property]=\"'PickupTime'\"\r\n            [header]=\"'Pickup Time'\"\r\n            [sortable]=\"true\">\r\n        </data-table-column>\r\n        <data-table-column\r\n            [property]=\"'PaymentMethod'\"\r\n            [header]=\"'Payment'\"\r\n            [sortable]=\"false\">\r\n        </data-table-column>\r\n        <data-table-column\r\n            [property]=\"'Branch'\"\r\n            [header]=\"'Branch'\">\r\n        </data-table-column>\r\n        <data-table-column\r\n            [property]=\"'TotalPrice'\"\r\n            [header]=\"'Total Price'\">\r\n        </data-table-column>\r\n        <data-table-column *ngIf=\"canEdit\"\r\n            [property]=\"'OrderStatus'\"\r\n            [header]=\"'Order Status'\">\r\n            <ng-template #dataTableCell let-item=\"item\">\r\n              <select class=\"form-control\" id=\"ok1\" [(ngModel)]=\"item.OrderStatus\" (change)=\"updateStatus(item.id,item.OrderStatus)\">\r\n                <option *ngFor=\"let status of orderStatus\" [ngValue]=\"status.ID\">{{status.Name}}</option>\r\n\r\n              </select>\r\n       <!-- <input type=\"number\" [(ngModel)]=\"item.year\" class=\"form-control input-sm\" style=\"width: 75px\"/> -->\r\n     </ng-template>\r\n        </data-table-column>\r\n        <data-table-column\r\n            [header]=\"'Actions'\">\r\n        <ng-template #dataTableHeader let-item=\"item\">\r\n        <i>Actions</i>\r\n      </ng-template>\r\n      <ng-template #dataTableCell let-item=\"item\">\r\n        <a [href]=\"'orders/edit?id='+item.id\" class=\"btn btn-sm btn-primary\">Edit</a>\r\n        <a [href]=\"'orders/delete?id='+item.id\" class=\"btn btn-sm btn-warning\">Delete</a>\r\n      </ng-template>\r\n          </data-table-column>\r\n    </data-table>\r\n\r\n</div>\r\n</div>\r\n<link href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" rel=\"stylesheet\">\r\n"
 
 /***/ }),
 
@@ -54,8 +54,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 let App3Component = class App3Component {
-    constructor(http) {
+    constructor(http, elm) {
         this.http = http;
+        this.canEdit = false;
         this.orderStatus = [{ ID: 0, Name: 'Received' }, { ID: 1, Name: 'Cooking' }, { ID: 2, Name: 'Ready' }];
         this.ordersCount = 0;
         // special params:
@@ -66,6 +67,7 @@ let App3Component = class App3Component {
             paginationLimit: 'Max results',
             paginationRange: 'Result range'
         };
+        this.canEdit = elm.nativeElement.getAttribute('edit');
         this.getOrders().subscribe((data) => {
             this.ordersdata = data.map(x => { return { id: x.id, PickupTime: x.PickupTime.substring(0, 10), PaymentMethod: x.PaymentMethod, Branch: x.Branch_Name, TotalPrice: x.TotalPrice, Description: 'Items: ' + x.items.reduce((a, b) => (a + (b.Product_Name + ':' + b.Quantity) + '|'), '') + 'Additional Notes:' + x.Description, OrderStatus: x.OrderStatus }; });
             this.ordersResource = new __WEBPACK_IMPORTED_MODULE_2_angular5_data_table__["c" /* DataTableResource */](this.ordersdata);
@@ -86,7 +88,7 @@ let App3Component = class App3Component {
     getOrders() {
         return this.http.get("./orders/getOrders")
             .map((res) => res.json())
-            .catch((err, caught) => { });
+            .catch((err, caught) => { return __WEBPACK_IMPORTED_MODULE_3_rxjs_Rx__["a" /* Observable */].throw(caught); });
     }
     changeStatus(id, status) {
         return this.http.get("./orders/changeStatus?id=" + id + "&status=" + status)
@@ -107,7 +109,7 @@ App3Component = __decorate([
         template: __webpack_require__("./src/app3/app3.component.html"),
         styles: [__webpack_require__("./src/app3/app3.component.css")]
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */], __WEBPACK_IMPORTED_MODULE_0__angular_core__["t" /* ElementRef */]])
 ], App3Component);
 
 // export class Product {

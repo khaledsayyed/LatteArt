@@ -26,7 +26,7 @@ ADMINRIGHTS=(
 	('customer', 'Customer'),
 )
 phone_regex = RegexValidator(regex=r'^\d{9,8}$', message="Phone number must be entered in the format: '--------'. Up to 8 digits allowed.")
-	
+
 class CustomerProfile(models.Model):
 	Name = models.CharField(max_length=100)
 	UserName = models.CharField(max_length=100)
@@ -54,7 +54,7 @@ class Branch(models.Model):
 	ImageID=models.ImageField(upload_to= 'Branch_images')
 
 class Order(models.Model):
-	#Customer = models.ForeignKey(CustomerProfile,on_delete=models.CASCADE)
+	Customer = models.ForeignKey(CustomerProfile,null=True, blank=True,on_delete=models.CASCADE)
 	PickupTime = models.DateTimeField(auto_now=False)
 	PaymentMethod = models.CharField(default=2, max_length=100, choices=PAYMENTMETHODS)
 	#order ID will be automatically generated
@@ -63,25 +63,23 @@ class Order(models.Model):
 	Description = models.CharField(max_length=300)
 	OrderStatus=models.IntegerField(default=0, choices=ORDERSTATUS)
 
-<<<<<<< HEAD
+
 class OrderItem(models.Model):
     Order=models.ForeignKey(Order, related_name="items", null=True, blank=True,on_delete=models.CASCADE)
     Product = models.ForeignKey(Product,on_delete=models.CASCADE, related_name='products')
     Quantity = models.IntegerField()
 
 
-=======
 class Manager(models.Model):
 	Name=models.CharField(max_length=100)
 	UserName = models.CharField(max_length=100)
 	Password = models.CharField(max_length=100)
 	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
-	
->>>>>>> f16a16f747d36564ce9006dc2c61aa2ce6cddfbd
+
 class Employee(models.Model):
 	Name=models.CharField(max_length=100)
 	UserName = models.CharField(max_length=100)
 	Password = models.CharField(max_length=100)
 	Email=models.EmailField(max_length=100, blank=False, unique=True, null=False)
 	#AdminRights=models.CharField(max_length=10, choices=ADMINRIGHTS)
-#	Branch=models.ForeignKey(Branch, on_delete=models.CASCADE)
+	Branch=models.ForeignKey(Branch,null=True, blank=True, on_delete=models.CASCADE)

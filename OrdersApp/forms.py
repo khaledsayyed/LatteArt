@@ -14,10 +14,9 @@ class NewProductForm (forms.ModelForm):
 class EditWalletForm(forms.ModelForm):
 	class Meta:
 		model = CustomerProfile
-		fields = ('Name','Wallet')									  
+		fields = ('Name','Wallet')
 
 class SignupForm(forms.ModelForm):
 	class Meta:
 		model=CustomerProfile
-		fields=('PhoneNumber','Name','Password','Email', 'UserName')
-	
+		fields=('Name','Password','Email','PhoneNumber', 'UserName')

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 	'OrdersApp.apps.OrdersappConfig',
-	'table'
+	'table',
+    'bootstrap3',
 ]
 
 MIDDLEWARE = [

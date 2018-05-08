@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-7">
-           <div class="card card-outline mb-3">
+           <div *ngIf="view" class="card card-outline mb-3">
 
                     <div class="card-header card-primary" style="font-size:15px;font-weight:bolder">Available Products</div>
 
@@ -17,14 +17,43 @@
                     </div>
                 </div>
               </div>
+           <div *ngIf="!view" class="card card-outline mb-3">
+
+                    <div class="card-header card-primary" style="font-size:15px;font-weight:bolder">Order Items</div>
+
+                    <!--div class="input-group input-group-lg inner-addon left-addon" style="width:100%"><input type="search" class="form-control input-lg" (keyup)="filter()" style="border-radius:0px" name="" placeholder="search" [(ngModel)]="SearchTerm" /><i style="z-index:55;" class="fa fa-search searchIcon fa-lg"></i><span *ngIf="SearchTerm.length>0" (click)="clearSearch();" class="fa fa-window-close fa-2x searchClear"> </span></div-->
+
+
+                     <ul  class="list-group list-group-flush" style="height:130px;overflow-y:auto;">
+                         <li  style="margin:5px;" *ngFor="let item of OrderItems" class="list-group-item item">
+ <div class="row">
+ <div class="col col-8">{{ item.Name }} <span class="text-muted">($ {{ item.Price}} )</span>
+ </div>                      <div class="input-group col col-3">
+                             <span class="input-group-btn">
+                               <button *ngIf="item.Count>1" class="btn btn-secondary" type="button" (click)="item.Count=+item.Count-1;updatePrice();"><i class="fa fa-minus"></i></button>
+                               <button *ngIf="item.Count==1" class="btn btn-secondary" type="button" (click)="removeItem(item);"><i class="fa fa-trash"></i></button>
+                             </span>
+                             <input type="text" class="form-control" style="padding:3px 4px" (change)="updatePrice();" [(ngModel)]="item.Count" (change)="item.Count=(item.Count>item.Quantity)?item.Quantity:item.Count;updatePrice();">
+                             <span class="input-group-btn">
+                               <button class="btn btn-secondary" [title]="((item.Unlimited)||item.Count<item.Quantity)?'add':'no more items to buy'" [disabled]="!((item.Unlimited)||item.Count<item.Quantity)" type="button" (click)="item.Count=+item.Count+1;updatePrice();"><i class=" fa fa-plus"></i></button>
+                             </span>
+                           </div>
+
+  </div>
+                         </li>
+                       </ul>
+                       <button (click)="view=true" class="btn btn-primary">Add more Items</button>
+              </div>
+
 
     </div>
+
     <div class="col-lg-5" >
        <!--div class="affix"-->
           <div class="card card-outline mb-4"style="padding:10px;">
                     <div class="card-header card-primary" style="font-size:15px;font-weight:larger">Your Order</div>
 <div class="form-group">
-  <label for="exampleFormControlSelect1">Branch{{SelectedBranch}}</label>
+  <p for="exampleFormControlSelect1">Branch</p>
   <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="SelectedBranch">
     <option *ngFor="let branch of Branches" [ngValue]="branch.ID">{{branch.Name}}</option>
 
@@ -64,6 +93,8 @@
                                 </label>
 </div>
                      <div class="card-block" style="padding:0">
+                       <div *ngIf="view">
+                       <p>Order Items</p>
                         <ul [dragula]='"fourth-bag"' class="list-group list-group-flush" [dragulaModel]='OrderItems' style="height:130px;overflow-y:auto;">
                             <li  style="margin:5px;" *ngFor="let item of OrderItems" class="list-group-item item">
 <div class="row">
@@ -81,7 +112,7 @@
 
      </div>
                             </li>
-                              </ul>
+                          </ul></div>
                               <input class="form-control" id="desc" name="desc" placeholder="Additional order notes" [(ngModel)]="Description" type="text" value="" /><br/>
                               <div class="row">
                               <strong class="col col-9">Total Price:{{TotalPrice}}</strong>

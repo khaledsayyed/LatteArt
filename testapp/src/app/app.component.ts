@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Rx';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent{
+  view:boolean=true;
   selected:string;
   id:number=-1;
   Description:string="";
@@ -45,6 +46,7 @@ public getBranches(): Observable<any> {
 constructor(private dragulaService: DragulaService, private http: Http, elm: ElementRef){//}, private _httpservice: HttpService,) {
   if(elm.nativeElement.getAttribute('id')){
   this.id = elm.nativeElement.getAttribute('id');
+
       this.getOrder().subscribe((data) => {
         this.date=new Date(data[0].PickupTime);
         this.PaymentMethod=data[0].PaymentMethod;
@@ -64,6 +66,7 @@ constructor(private dragulaService: DragulaService, private http: Http, elm: Ele
             }  );
 
               if (this.selected) {
+                  this.view=false;
           let selectedItems = this.selected.split(',');
 
           selectedItems.forEach(s=>{
@@ -120,7 +123,7 @@ updatePrice():void{
   			 this.TotalPrice=this.OrderItems.reduce((a,b)=>(a+(b.Count*b.Price)),0);
 }
 sendOrder():void{
-  this.sendOrderMethod().subscribe((data)=>window.location.replace("../orders"));
+  this.sendOrderMethod().subscribe((data)=>window.location.replace("../ordersttt"));
 }
 sendOrderMethod(): Observable<any>{
   let headers = new Headers({ 'Content-Type': 'application/json' });

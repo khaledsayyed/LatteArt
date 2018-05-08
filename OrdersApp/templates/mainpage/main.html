@@ -1,5 +1,5 @@
 
-		{% extends 'layout.html' %} 
+		{% extends 'layout.html' %}
 {% block 'body' %}
 <script type="text/javascript">
         $(document).ready(function() {
@@ -23,26 +23,26 @@
             });
         });
     </script>
-	
+
 {% if wrongPass or wrongUname %}
     <div id="alertBox" title="Alert">
 	{% if wrongPass %}
         <p>Incorrect Passowrd, please try again</p>
 	{% endif%}
-	
+
 	{% if wrongUname %}
 		<p>This username does not exist, please signt up</p>
 	{% endif %}
     </div>
 {% endif %}
 <div class="main">
-<!-- <!-- Navigation Bar  -->   
+<!-- <!-- Navigation Bar  -->
 
 
 <!--Imge slideshow --->
 
 
-   
+
 
 <!-- Map for branches view  -->
 		<h3>Branches' location  </h3>
@@ -52,7 +52,7 @@
                     var bliss = {lat: 33.903267, lng: 35.483575};
 					var lau ={lat: 33.890911, lng:35.509775};
 					var location =[ bliss, lau]
-								   					
+
                     var map = new google.maps.Map(document.getElementById('map'), {
                     zoom:12,
                     center: bliss
@@ -72,19 +72,19 @@
                  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyArR9uG7OnBYJFeN4e5GtL5osCjVUSopQM&callback=initMap">
             </script>
 
-        
+
 		<a href = "https://www.google.co.in/maps/dir//33.8990810000,35.4836440000" class="button"> Get directions</a>
 
 
 <!---history--->
-		
+
 		<div class="container" id="aboutus">
 		    <div3 class="w3-content" style="max-width:700px">
 				<h1 class="w3-center w3-padding-25px"><span class="w3-tag w3-wide">About Latte Art</span></h1>
                 <p> History
                 </p>
                 </div >
-		
+
 <!----socail media--->
 		<a href="https://www.facebook.com/LatteArtLebanon/?ref=br_rs" ><i class="fab fa-facebook-square" class=""></i></a>
 		<a href="https://www.instagram.com/latteart.lb/?hl=en"><i class="fab fa-instagram"></i></a>
